@@ -1,0 +1,146 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+    outline: none;
+}
+
+@font-face{
+    font-family: 'Yantra';
+    src: url('Yantramanav-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Arvo';
+    src: url('Arvo-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'Patua';
+    src: url('PatuaOne-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Roboto';
+    src: url('Roboto-Medium.ttf');
+}
+
+@font-face{
+    font-family: 'Lato';
+    src: url('Lato-Regular.ttf');
+}
+
+
+#page_accueil {
+	width: 80%;
+	min-width: 800px;
+	background: url("fond1.jpg") no-repeat center fixed ;
+	height: 2000px;
+	background-size: cover;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	opacity: 1;
+}
+
+header {
+	min-width: 800px;
+	width: 80%;
+	height: 100px;
+	background-color: white;
+    z-index: 2;
+	margin: auto;
+}
+
+header #bandeau_logo{
+	background-color:white;
+	width: 10%;
+	height: 100%;
+	float: left;
+}
+
+header #bandeau_logo img {
+	height: 54px;
+	display: block;
+	background-color: white;
+	margin: 21px auto 0px auto;
+
+}
+
+header #bandeau_contact {
+	background-color:white;
+	width: 45%;
+	height: 100%;
+	float: left;
+}
+
+header #bandeau_Connexion {
+	background-color: white;
+	width:10%;
+	height: 100%;
+	float: right;
+	min-width: 120px;
+}
+
+header #bandeau_Connexion a {
+	display: block;
+	width: 120px;
+	margin: 38px auto 0px auto;
+
+	font-family: 'Roboto';
+	font-weight: normal;
+	
+}
+
+header a {
+	display: block;
+	background-color:white;
+	font-size: 17px;
+	width: 84px;
+	font-family: 'Yantra';
+	margin: 26px 0px 0px 20px; 
+	color: black;
+}
+
+#grandtitre {
+	width: 60%;
+	height: 300px;
+	font-size: 120px;
+	font-family: 'Patua';
+	margin: 180px 0px 0px 20%;
+	color: white;
+	float: left;
+	
+}
+
+#page_accueil h2 {
+
+	font-family: 'Yantra';
+	width: 60%;
+	height: 80px;
+	margin: 10px 20% 40px 20%;
+	color: white;
+	font-weight: normal;
+	float: left;
+}
+
+#barre_recherche {
+	width: 60%;
+	background-color:white;
+	height: 80px;
+	margin: 0px 20% 300px 20%;
+	float: left;
+}
+
+#page_accueil #slide2 {
+	background-color:#f3f3f3;
+	height: 2000px;
+	width: 100%;
+
+	float: left;
+
+}
