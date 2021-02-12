@@ -10,169 +10,473 @@ a {
 
 @font-face{
     font-family: 'Yantra';
-    src: url('Yantramanav-Light.ttf');
+    src: url('font/Yantramanav-Light.ttf');
 }
 
 @font-face{
     font-family: 'Arvo';
-    src: url('Arvo-Bold.ttf');
+    src: url('font/Arvo-Bold.ttf');
 }
 
 @font-face{
     font-family: 'Patua';
-    src: url('PatuaOne-Regular.ttf');
+    src: url('font/PatuaOne-Regular.ttf');
 }
 
 @font-face{
     font-family: 'Roboto';
-    src: url('Roboto-Medium.ttf');
+    src: url('font/Roboto-regular.ttf');
 }
 
 @font-face{
     font-family: 'Lato';
-    src: url('Lato-Regular.ttf');
+    src: url('font/Lato-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Alata';
+    src: url('font/Alata-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'RobotoSlab';
+    src: url('font/RobotoSlab-Light.ttf');
 }
 
 
-#page_accueil {
-	width: 80%;
+/*---------------------------------------------------------- header ----------------------------------------------------------*/
+
+header {
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid #cdcdcd;
+	float: left;
+
+}
+
+header div {
+	background-color: ;
+	width: 10%;
+	height: 100%;
+	float: right;
+}
+
+header div a {
+	display: block;
+	margin: 34px 0px 0px 0px;
+	float: left;
+	font-size: 24px;
+	color: white;
+	font-family: 'Alata';
+}
+
+header #header_logo {
+	background-color: ;
+	width: 10%;
+	height: 100%;
+	float: left;
+}
+
+header #header_logo img {
+	height: 70px;
+	margin: 15px 0px 15px 15px;
+	display: block;
+	border-radius: 3px;
+}
+
+header #header_contact {
+	background-color: ;
+	font-family: 'Alata';
+	height:100%;
+	width: 10%;
+	float: left;
+}
+
+header #header_contact a {
+	background-color: ;
+	display: block;
+	margin: 34px auto 0px auto;
+	font-size: 24px;
+	color: white;
+}
+
+header #header_Compte a {
+	background-color:;
+}
+
+header #header_Publier {
+	background-color: ;
+
+}
+
+header #header_Publier a{
+	background-color:#ff1c1c ;
+	margin: 24px 0px 0px 40px; 
+	height: 44px;
+	padding-top: 8px;
+	width: 130px;
+	text-align: center;
+	border-radius: 3px;
+}
+
+header #header_Publier img {
+	width: 20px;
+	margin: 8px 0px 0px 12px;
+	float: left;
+
+}
+
+/*---------------------------------------------------------- fond accueil ----------------------------------------------------------*/
+
+/*--------------------------- Recherche ---------------------------*/
+
+#fond_accueil {
+	width: 100%;
 	min-width: 800px;
-	background: url("fond1.jpg") no-repeat center fixed ;
-	height: 2000px;
+	background: url("fond4.jpg") no-repeat center ;
+	height: 700px;
 	background-size: cover;
-	margin-left: auto;
-	margin-right:auto;
-	margin-top: 0px;
-	margin-bottom: 0px;
 	opacity: 1;
 }
 
-header {
-	min-width: 800px;
-	width: 80%;
+#fond_accueil h1 {
+	width: 100%;
+	height: 180px;
+	font-size: 120px;
+	font-family: 'Patua';
+	margin:  80px 0% 0px 0%;
+	color: white;
+	text-align: center;
+	display: inline-block;
+
+}
+
+#fond_accueil h2 {
+	font-family: 'Yantra';
+	width: 60%;
+	height: 80px;
+	margin: 0px 20% 40px 20%;
+	color: white;
+	font-weight: normal;
+	float: left;
+	text-align: center;
+}
+
+#recherche_global {
+	background-color: ;
+	width:655px;
+	height: 300px;
+	margin: 0px auto 0px auto;
+	min-width: 650px;
+}
+
+#fond_accueil #recherche {
+	background-color:;
+	width: 200px;
 	height: 100px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	border-left: 2px solid white;
+	color:white;
+	font-weight: bold;
+}
+
+#fond_accueil #recherche input {
+	width: 120px;
+	height: 22px;
+	float: left;
+	display: block;
+	margin: 10px 0px 0px 30px;
+	font-size: 18px;
+	font-family: 'Yantra';
+	padding-bottom: 0px;
+	border-bottom: white 2px solid;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	background-color:rgba(0, 0, 0, 0);
+	color: white;
+}
+
+#fond_accueil #recherche input:focus {
+    outline:  none;
+}
+
+#fond_accueil #recherche #recherche_localisation{
+	background-color: ;
+	width: 140px;
+	height: 40px;
+	border:none;
+	margin: 10px 0px 0px 30px;
+	float: left;
+	font-size: 22px;
+	font-family: 'RobotoSlab';
+	font-weight: normal;
+}
+
+#fond_accueil #recherche_fleche {
+	background-color: ;
+	width: 70.5px;
+	height: 70.5px;
+	float: right;
+	margin: 0px 0px 0px 150px;
+	transform: rotate(45deg) translateX(-23px) translateY(-75px);
+	/*--------------------------- 24 / 74 pour 1px border ---------------------------*/
+	border-top: 2px solid white;
+	border-right: 2px solid white;
+
+}
+
+#fond_accueil #recherche_2 {
+	float: left;
+	width: 200px;
+	height: 100px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	border-left: none;
+	background-color: ;
+}
+
+#fond_accueil #recherche_domaine {
+	background-color: ;
+	width: 100px;
+	height: 40px;
+	border:none;
+	margin: 10px 0px 0px 62px;
+	float: left;
+	font-size: 22px;
+	font-family: 'RobotoSlab';
+	font-weight: normal;
+	color: white;
+}
+
+#fond_accueil #recherche_2 input {
+	width: 120px;
+	height: 22px;
+	float: left;
+	display: block;
+	margin: 10px 0px 0px 62px;
+	font-size: 18px;
+	font-family: 'Yantra';
+	padding-bottom: 0px;
+	border-bottom: white 2px solid;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	background-color:rgba(0, 0, 0, 0);
+	color: white;
+}
+
+#fond_accueil #recherche_2 input:focus {
+    outline:  none;
+}
+
+#fond_accueil #recherche_fleche_2 {
+
+	background-color:;
+	width: 70.5px;
+	height: 70.5px;
+	float: left;
+	margin: 0px 0px 0px 150px;
+	transform: rotate(45deg) translateX(-38px) translateY(-60px);
+	border-top: 2px solid white;
+	border-right: 2px solid white;
+
+	z-index: 10;
+	position: relative;
+}
+
+#recherche {
+-moz-animation:  cssAnimation 1s 1 linear;
+}
+
+@-moz-keyframes cssAnimation {
+from {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(179px) ;
+-moz-transform: rotate(0deg) scale(1) skew(0deg) translate(179px) ;
+-o-transform: rotate(0deg) scale(1) skew(0deg) translate(179px) ;
+ }
+to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
+-moz-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
+-o-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
+ }
+}
+
+
+#fond_accueil #recherche_3 {
+	float: left;
+	background-color: ;
+	width: 200px;
+	height: 100px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
+	
+}
+
+#fond_accueil #recherche_fleche_3 {
+
+	background-color: ;
+	width: 70.5px;
+	height: 70.5px;
+	float: left;
+	margin: 0px 0px 0px 150px;
+	transform: rotate(45deg) translateX(-29px) translateY(-50px);
+	border-top: 2px solid white;
+	border-right: 2px solid white;
+	z-index: 1;
+	position: relative;
+}
+
+#fond_accueil a #recherche_3 #recherche_final {
+	background-color:;
+	font-family: 'Alata';
+	width: 140px;
+	height: 40px;
+	font-size: 26px;
+	float: left;
+	margin: 30px 0px 0px 70px;
+	color :white;
+	z-index: 10;
+	position: relative;
+}
+
+#fond_accueil a {
+	background-color: red;
+	z-index: 20;
+	position: relative;
+
+}
+
+/*--------------------------- transition ---------------------------*/
+
+#transition_section {
+	background-color: #f3f3f3;
+	float: left;
+	width: 100%;
+	height: 200px;
+}
+
+#transition_section h2 {
+	font-family: 'RobotoSlab';
+	width: 60%;
+	height: 80px;
+	color: black;
+	font-weight: normal;
+	float: left;
+	text-align: center;
+	font-size: 30px;
+	margin: 60px 0px 0px 20%;
+}
+
+/*--------------------------- Stages ---------------------------*/
+
+section {
 	background-color: white;
-    z-index: 2;
+	width:100%;
+	height: 1000px;
+}
+
+section .accueil_stage {
+	width: 300px;
+	background-color: #f3f3f3;
+	height: 400px;
+	margin: 50px 0px 0px 50px;
+	float: left;
+	border: solid grey 1px;
+	box-shadow: 0px 0px 10px -1px #999999;
+}
+
+section .test1 {
+	background-color:;
+	width: 100px;
+	float: left;
+	height: 100px;
+	margin: 20px 0px 0px 20px;
+
+}
+
+section .accueil_stage .test1 img{
+	display: block;
+	height: 98px;
+	background-color:;
+	margin: auto;
+	border: solid 1px black;
+	border-radius: 4px;
+}
+
+section .test2 {
+	background-color:;
+	width: 180px;
+	float: right;
+	height: 20px;
+	margin-top: 30px;
+}
+
+
+section .accueil_stage .test2 img {
+	display: block;
+	height: 100%;
+	margin: 0px 0px 0px 10px;
+	float: left;
+}
+
+section .accueil_stage .test2 img:nth-child(1) {
+	margin-left: 16px;
+	background-color: ;
+}
+
+section .accueil_stage .test3 {
+	background-color: ;
+	width: 160px;
+	height: 20px;
+	float: left;
+	margin: 10px 0px 0px 20px;
+	vertical-align: middle;
+}
+
+section .accueil_stage .test3 img{
+	background-color: white;
+	height: 16px;
+	float: left;
+	margin-right: 12px;
+	margin-top: 2px;
+}
+
+
+
+section .accueil_stage .accueil_stage_logo {
+	background-color: ;
+	width: 100%;
+	height: 40%;
+	border-bottom: solid grey 1px;
+}
+
+section .accueil_stage .accueil_stage_logo img{
+	display: block;
+	height: 100%;
+	background-color:;
 	margin: auto;
 }
 
-header #bandeau_logo{
-	background-color:white;
-	width: 10%;
-	height: 100%;
+section .accueil_stage .accueil_stage_etoile {
+	background-color: ;
 	float: left;
+	height: 8%;
+	margin: 10px 0px 0px 0px;
 }
 
-header #bandeau_logo img {
-	height: 54px;
+section .accueil_stage .accueil_stage_etoile img {
 	display: block;
-	background-color: white;
-	margin: 21px auto 0px auto;
-
-}
-
-header #bandeau_contact {
-	background-color:white;
-	width: 45%;
 	height: 100%;
+	margin: 0px 0px 0px 10px;
 	float: left;
 }
 
-header #bandeau_contact a{
-	margin: 38px 0px 0px 20px; 
-}
-
-header #bandeau_Connexion {
-	background-color: white;
-	width:10%;
-	height: 100%;
-	float: right;
-	min-width: 120px;
-}
-
-header #bandeau_Connexion a {
-	display: block;
-	width: 120px;
-	margin: 38px auto 0px auto;
-	font-weight: normal;
-	
-}
-
-header #bandeau_Compte {
-	background-color: white;
-	width: 12%;
-	float: right;
-	height: 100%;
-	min-width: 120px;
-}
-
-header #bandeau_Compte a{
-	width: 122px;
-}
-
-header #bandeau_Avis {
-	background-color: white;
-	float: right;
-	height: 100%;
-	width: 10%;
-}
-
-header #bandeau_Avis a {
-	width: 140px;
-	text-align: center;
-	height: 36px;
-	padding-top: 14px;
-	margin-top: 24px;
-	color: white;
-	background-color: #004976;
-}
-
-header a {
-	display: block;
-	background-color:white;
-	font-size: 17px;
-	width: 84px;
-	font-family: 'Yantra';
-	margin: 38px auto 0px auto; 
-	color: #004976;
-	font-family: 'Roboto';
-}
-
-#grandtitre {
-	width: 60%;
-	height: 300px;
-	font-size: 120px;
-	font-family: 'Patua';
-	margin: 180px 0px 0px 20%;
-	color: white;
-	float: left;
-	
-}
-
-#page_accueil h2 {
-
-	font-family: 'Yantra';
-	width: 60%;
-	height: 80px;
-	margin: 10px 20% 40px 20%;
-	color: white;
-	font-weight: normal;
-	float: left;
-}
-
-#barre_recherche {
-	width: 60%;
-	background-color:white;
-	height: 80px;
-	margin: 0px 20% 300px 20%;
-	float: left;
-}
-
-#page_accueil #slide2 {
-	background-color:#f3f3f3;
-	height: 2000px;
-	width: 100%;
-
-	float: left;
-
+section .accueil_stage .accueil_stage_etoile img:nth-child(1) {
+	margin-left: 50px;
 }
