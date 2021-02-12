@@ -40,10 +40,10 @@
 	 				<!-- Connexion à la base de données -->
 					<?php include("connexion_bdd.php");
 					// Sélection des titres de musique, nom des artistes, nom des pays et nom des styles musicaux pour faciliter la recherche
-						$lieux = $bdd->query('SELECT localisation FROM avis');
+						$lieux = $bdd->query('SELECT lieu FROM localisation');
 						echo '<option value="Toute localisation">';
 						while($lieu = $lieux->fetch()) {
-							echo '<option value="' . $lieu['localisation'] . '">';
+							echo '<option value="' . $lieu['lieu'] . '">';
 						}
 						$lieux->closeCursor(); ?>
 				</datalist>
