@@ -459,6 +459,12 @@ section .accueil_stage {
 	margin: 50px 0px 0px 50px;
 	float: left;
 	border: solid #545454 1px;
+	transition: background-color 400ms;
+}
+
+section .accueil_stage:hover {
+	background-color: white;
+	cursor:pointer;
 }
 
 section #stage_info {
@@ -509,16 +515,56 @@ section .accueil_stage .accueil_stage_info {
 	width: 160px;
 	height: 20px;
 	float: left;
-	margin: 10px 0px 0px 20px;
+	margin: 12px 0px 0px 20px;
 	vertical-align: middle;
+	font-family: 'Alata';
+	color:#545454;
 }
 
 section .accueil_stage .accueil_stage_info img{
-	background-color: white;
-	height: 16px;
+	background-color: ;
+	height: 18px;
 	float: left;
 	margin-right: 12px;
-	margin-top: 2px;
+	margin-top: 3px;
+}
+
+section .accueil_stage h1 {
+	font-weight: normal;
+	background-color: ;
+	float: left;
+	width: 100%;
+	font-size:30px;
+	font-family: 'Patua';
+	text-align: center;
+	margin: 22px 0px 30px 0px;
+}
+
+section .accueil_stage p {
+	color:#545454;
+	font-family: 'Alata';
+	background-color:;
+	margin: 0px 0px 0px 5%;
+	width: 90%;
+	line-height: 26px;
+	height: 90%;
+}
+
+section .accueil_stage p img {
+	width: 20px;
+	height: 20px;
+	margin: 0px 10px 0px 10px;
+}
+
+section .accueil_stage time {
+	background-color:;
+	color:#545454;
+	font-family: 'Alata';
+	font-size: 16px;
+	display: block;
+	text-align: center;
+	height:5%;
+
 }
 
 
