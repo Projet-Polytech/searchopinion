@@ -63,16 +63,17 @@ header div {
 
 header div a {
 	display: block;
-	margin: 34px 0px 0px 0px;
+	margin: 36px 0px 0px 0px;
 	float: left;
-	font-size: 24px;
+	font-size: 22px;
 	color: white;
 	font-family: 'Alata';
+	background-color: ;
 }
 
 header #header_logo {
 	background-color: ;
-	width: 10%;
+	width: 120px;
 	height: 100%;
 	float: left;
 }
@@ -88,40 +89,68 @@ header #header_contact {
 	background-color: ;
 	font-family:'Alata';
 	height:100%;
-	width: 10%;
+	width: 120px;
 	float: left;
 }
 
 header #header_contact a {
-	background-color: ;
+	background-color:;
 	display: block;
-	margin: 34px auto 0px auto;
-	font-size: 24px;
 	color: white;
 }
 
-header #header_Compte a {
+header #header_contact a:hover img{
 	background-color:;
+	transform: rotate(90deg);
+}
+
+header #header_Connexion {
+	width: 160px;
+}
+
+header #header_Connexion a:hover img{
+	background-color:;
+	transform: rotate(90deg);
+}
+
+header #header_Compte {
+	background-color:;
+	width: 160px;
+}
+
+header div a img {
+	background-color:;
+	width: 14px;
+	height:14px;
+	margin-left: 6px;
+	transition: transform 400ms ease-out;
+}
+
+header #header_Compte a:hover img {
+	background-color:;
+	transform: rotate(90deg);
 }
 
 header #header_Publier {
-	background-color: ;
-
+	background-color:;
+	width: 160px;
 }
 
 header #header_Publier a{
 	background-color:#ff1c1c ;
-	margin: 24px 0px 0px 40px; 
-	height: 44px;
+	margin: 27px 0px 0px 0px; 
+	height: 40px;
 	padding-top: 8px;
 	width: 130px;
 	text-align: center;
 	border-radius: 3px;
+	float: left;
 }
 
-header #header_Publier img {
+header #header_Publier a img {
 	width: 20px;
-	margin: 8px 0px 0px 12px;
+	height: 20px;
+	margin: 6px 0px 0px 12px;
 	float: left;
 
 }
@@ -164,116 +193,119 @@ header #header_Publier img {
 
 #recherche_global {
 	background-color: ;
-	width:655px;
+	width:552px;
 	height: 300px;
 	margin: 0px auto 0px auto;
-	min-width: 650px;
+	min-width: 0px;
 }
 
 #fond_accueil #recherche {
 	background-color:;
-	width: 200px;
+	width: 196px;
 	height: 100px;
 	margin: 0px 0px 0px 0px;
 	float: left;
-	border-bottom: 2px solid white;
-	border-top: 2px solid white;
-	border-left: 2px solid white;
+	border: 2px solid white;
 	color:white;
 	font-weight: bold;
 }
 
 #fond_accueil #recherche input {
-	width: 120px;
-	height: 22px;
+	width: 80%;
+	height: 28px;
 	float: left;
 	display: block;
-	margin: 10px 0px 0px 30px;
+	margin: 10px 0px 0px 7%;
 	font-size: 18px;
 	font-family: 'Yantra';
-	padding-bottom: 0px;
-	border-bottom: white 2px solid;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	background-color:rgba(0, 0, 0, 0);
-	color: white;
+	padding-left: 6%;
+	border:none;
+	background-color:white;
+	color: black;
 }
 
-#fond_accueil #recherche input:focus {
+#fond_accueil div input:focus {
     outline:  none;
 }
 
 #fond_accueil #recherche #recherche_localisation{
 	background-color: ;
-	width: 140px;
+	width: 100%;
 	height: 40px;
 	border:none;
-	margin: 10px 0px 0px 30px;
-	float: left;
+	margin: 10px 0px 0px 0px;
+	text-align: center;
+
 	font-size: 22px;
 	font-family: 'RobotoSlab';
 	font-weight: normal;
 }
 
-#fond_accueil #recherche_fleche {
+#fond_accueil #recherche #recherche_localisation img{
 	background-color: ;
+	width: 16px;
+	height: 24px;
+	padding-left: 8px;
+}
+
+#fond_accueil #recherche_fleche {
+	background-color:#ff1c1c ;
 	width: 70.5px;
 	height: 70.5px;
 	float: right;
 	margin: 0px 0px 0px 150px;
 	transform: rotate(45deg) translateX(-23px) translateY(-75px);
-	/*--------------------------- 24 / 74 pour 1px border ---------------------------*/
-	border-top: 2px solid white;
-	border-right: 2px solid white;
+/*--------------------------- 24 / 74 pour 1px border ---------------------------*/
+	border-top: 2px solid #ff1c1c ;
+	border-right: 2px solid #ff1c1c ;
 
 }
 
 #fond_accueil #recherche_2 {
 	float: left;
-	width: 200px;
+	width: 196px;
 	height: 100px;
-	margin: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 10px;
 	float: left;
-	border-bottom: 2px solid white;
-	border-top: 2px solid white;
-	border-left: none;
+	border: 2px solid white;
 	background-color: ;
 }
 
 #fond_accueil #recherche_domaine {
 	background-color: ;
-	width: 100px;
+	width: 100%;
 	height: 40px;
 	border:none;
-	margin: 10px 0px 0px 62px;
+	margin: 10px 0px 0px 0px;
 	float: left;
 	font-size: 22px;
 	font-family: 'RobotoSlab';
 	font-weight: normal;
 	color: white;
+	text-align: center;
+}
+
+#fond_accueil #recherche_2 #recherche_domaine img{
+	background-color: ;
+	width: 20px;
+	height: 24px;
+	padding-left: 8px;
 }
 
 #fond_accueil #recherche_2 input {
-	width: 120px;
-	height: 22px;
+	width: 80%;
+	height: 28px;
 	float: left;
 	display: block;
-	margin: 10px 0px 0px 62px;
+	margin: 10px 0px 0px 7%;
 	font-size: 18px;
 	font-family: 'Yantra';
-	padding-bottom: 0px;
-	border-bottom: white 2px solid;
-	border-top: none;
-	border-left: none;
-	border-right: none;
-	background-color:rgba(0, 0, 0, 0);
-	color: white;
+	padding-left: 6%;
+	border:none;
+	background-color:white;
+	color: black;
 }
 
-#fond_accueil #recherche_2 input:focus {
-    outline:  none;
-}
 
 #fond_accueil #recherche_fleche_2 {
 
@@ -308,29 +340,59 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 
 #fond_accueil #recherche_3 {
 	float: left;
-	background-color: ;
-	width: 200px;
+	background-color:#ff1c1c ;
+	width: 80px;
 	height: 100px;
-	margin: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 10px;
 	float: left;
-	border-bottom: 2px solid white;
-	border-top: 2px solid white;
+	border-bottom: 2px solid #ff1c1c ;
+	border-top: 2px solid #ff1c1c ;
+
 	
 }
 
 #fond_accueil #recherche_fleche_3 {
 
-	background-color: ;
+	background-color: #ff1c1c ;
 	width: 70.5px;
 	height: 70.5px;
 	float: left;
 	margin: 0px 0px 0px 150px;
-	transform: rotate(45deg) translateX(-29px) translateY(-50px);
-	border-top: 2px solid white;
-	border-right: 2px solid white;
+	transform: rotate(45deg) translateX(-136px) translateY(14px);
+	border-top: 2px solid #ff1c1c ;
+	border-right: 2px solid #ff1c1c ;
 	z-index: 1;
 	position: relative;
 }
+
+#fond_accueil #recherche_3 #recherche_final img {
+	width: 60%;
+	height: 50%;
+	background-color: ;
+	float: right;
+	margin:30% 10% 0px 0px;
+}
+
+#fond_accueil a #recherche_3 #recherche_final {
+	background-color:;
+	font-family: 'Alata';
+	width: 100%;
+	height: 100%;
+	float: left;
+	margin: 0px 0px 0px 0px;
+	z-index: 10;
+	position: relative;
+}
+
+#fond_accueil a {
+	background-color: red;
+	z-index: 20;
+	position: relative;
+
+}
+
+
+/*---------flèche 3 sauvegarde
 
 #fond_accueil a #recherche_3 #recherche_final {
 	background-color:;
@@ -345,12 +407,21 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 	position: relative;
 }
 
-#fond_accueil a {
-	background-color: red;
-	z-index: 20;
-	position: relative;
+#fond_accueil #recherche_fleche_3 {
 
+	background-color: #ff1c1c ;
+	width: 70.5px;
+	height: 70.5px;
+	float: left;
+	margin: 0px 0px 0px 150px;
+	transform: rotate(45deg) translateX(-29px) translateY(-50px);
+	border-top: 2px solid #ff1c1c ;
+	border-right: 2px solid #ff1c1c ;
+	z-index: 1;
+	position: relative;
 }
+
+-----------------*/
 
 /*--------------------------- transition ---------------------------*/
 
@@ -387,11 +458,14 @@ section .accueil_stage {
 	height: 400px;
 	margin: 50px 0px 0px 50px;
 	float: left;
-	border: solid grey 1px;
-	box-shadow: 0px 0px 10px -1px #999999;
+	border: solid #545454 1px;
 }
 
-section .test1 {
+section #stage_info {
+	background-color: #545454;
+}
+
+section .accueil_stage_logo {
 	background-color:;
 	width: 100px;
 	float: left;
@@ -400,7 +474,7 @@ section .test1 {
 
 }
 
-section .accueil_stage .test1 img{
+section .accueil_stage .accueil_stage_logo img{
 	display: block;
 	height: 98px;
 	background-color:;
@@ -409,7 +483,7 @@ section .accueil_stage .test1 img{
 	border-radius: 4px;
 }
 
-section .test2 {
+section .accueil_stage_etoile {
 	background-color:;
 	width: 180px;
 	float: right;
@@ -417,58 +491,6 @@ section .test2 {
 	margin-top: 30px;
 }
 
-
-section .accueil_stage .test2 img {
-	display: block;
-	height: 100%;
-	margin: 0px 0px 0px 10px;
-	float: left;
-}
-
-section .accueil_stage .test2 img:nth-child(1) {
-	margin-left: 16px;
-	background-color: ;
-}
-
-section .accueil_stage .test3 {
-	background-color: ;
-	width: 160px;
-	height: 20px;
-	float: left;
-	margin: 10px 0px 0px 20px;
-	vertical-align: middle;
-}
-
-section .accueil_stage .test3 img{
-	background-color: white;
-	height: 16px;
-	float: left;
-	margin-right: 12px;
-	margin-top: 2px;
-}
-
-
-
-section .accueil_stage .accueil_stage_logo {
-	background-color: ;
-	width: 100%;
-	height: 40%;
-	border-bottom: solid grey 1px;
-}
-
-section .accueil_stage .accueil_stage_logo img{
-	display: block;
-	height: 100%;
-	background-color:;
-	margin: auto;
-}
-
-section .accueil_stage .accueil_stage_etoile {
-	background-color: ;
-	float: left;
-	height: 8%;
-	margin: 10px 0px 0px 0px;
-}
 
 section .accueil_stage .accueil_stage_etoile img {
 	display: block;
@@ -478,5 +500,25 @@ section .accueil_stage .accueil_stage_etoile img {
 }
 
 section .accueil_stage .accueil_stage_etoile img:nth-child(1) {
-	margin-left: 50px;
+	margin-left: 16px;
+	background-color: ;
 }
+
+section .accueil_stage .accueil_stage_info {
+	background-color: ;
+	width: 160px;
+	height: 20px;
+	float: left;
+	margin: 10px 0px 0px 20px;
+	vertical-align: middle;
+}
+
+section .accueil_stage .accueil_stage_info img{
+	background-color: white;
+	height: 16px;
+	float: left;
+	margin-right: 12px;
+	margin-top: 2px;
+}
+
+
