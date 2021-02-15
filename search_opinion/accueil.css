@@ -145,6 +145,7 @@ header #header_Publier a{
 	text-align: center;
 	border-radius: 3px;
 	float: left;
+	transition: background-color 400ms;
 }
 
 header #header_Publier a img {
@@ -155,9 +156,13 @@ header #header_Publier a img {
 
 }
 
+header #header_Publier a:hover {
+	background-color: #ab0000 ;
+}
+
 /*---------------------------------------------------------- fond accueil ----------------------------------------------------------*/
 
-/*--------------------------- Recherche ---------------------------*/
+/*-------------------------------- Recherche --------------------------------*/
 
 #fond_accueil {
 	width: 100%;
@@ -166,6 +171,10 @@ header #header_Publier a img {
 	height: 700px;
 	background-size: cover;
 	opacity: 1;
+}
+
+#fond_accueil div input:focus {
+    outline:  none;
 }
 
 #fond_accueil h1 {
@@ -177,7 +186,6 @@ header #header_Publier a img {
 	color: white;
 	text-align: center;
 	display: inline-block;
-
 }
 
 #fond_accueil h2 {
@@ -224,10 +232,6 @@ header #header_Publier a img {
 	color: black;
 }
 
-#fond_accueil div input:focus {
-    outline:  none;
-}
-
 #fond_accueil #recherche #recherche_localisation{
 	background-color: ;
 	width: 100%;
@@ -235,7 +239,6 @@ header #header_Publier a img {
 	border:none;
 	margin: 10px 0px 0px 0px;
 	text-align: center;
-
 	font-size: 22px;
 	font-family: 'RobotoSlab';
 	font-weight: normal;
@@ -248,18 +251,6 @@ header #header_Publier a img {
 	padding-left: 8px;
 }
 
-#fond_accueil #recherche_fleche {
-	background-color:#ff1c1c ;
-	width: 70.5px;
-	height: 70.5px;
-	float: right;
-	margin: 0px 0px 0px 150px;
-	transform: rotate(45deg) translateX(-23px) translateY(-75px);
-/*--------------------------- 24 / 74 pour 1px border ---------------------------*/
-	border-top: 2px solid #ff1c1c ;
-	border-right: 2px solid #ff1c1c ;
-
-}
 
 #fond_accueil #recherche_2 {
 	float: left;
@@ -306,22 +297,6 @@ header #header_Publier a img {
 	color: black;
 }
 
-
-#fond_accueil #recherche_fleche_2 {
-
-	background-color:;
-	width: 70.5px;
-	height: 70.5px;
-	float: left;
-	margin: 0px 0px 0px 150px;
-	transform: rotate(45deg) translateX(-38px) translateY(-60px);
-	border-top: 2px solid white;
-	border-right: 2px solid white;
-
-	z-index: 10;
-	position: relative;
-}
-
 #recherche {
 -moz-animation:  cssAnimation 1s 1 linear;
 }
@@ -347,7 +322,7 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 	float: left;
 	border-bottom: 2px solid #ff1c1c ;
 	border-top: 2px solid #ff1c1c ;
-
+	transition: background-color 400ms, border-bottom 400ms, border-top 400ms;
 	
 }
 
@@ -363,6 +338,7 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 	border-right: 2px solid #ff1c1c ;
 	z-index: 1;
 	position: relative;
+	transition: background-color 400ms, border-right 400ms, border-top 400ms;
 }
 
 #fond_accueil #recherche_3 #recherche_final img {
@@ -384,6 +360,19 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 	position: relative;
 }
 
+#fond_accueil a #recherche_3:hover {
+	background-color: #ab0000;
+	border-bottom: 2px solid #ab0000 ;
+	border-top: 2px solid #ab0000 ;
+}
+
+#fond_accueil a :hover #recherche_fleche_3{
+	background-color: #ab0000;
+	border-right: 2px solid #ab0000 ;
+	border-top: 2px solid #ab0000 ;
+}
+
+
 #fond_accueil a {
 	background-color: red;
 	z-index: 20;
@@ -391,48 +380,16 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 
 }
 
+/*--------------------------------------------- transition ---------------------------------------------*/
 
-/*---------flèche 3 sauvegarde
-
-#fond_accueil a #recherche_3 #recherche_final {
-	background-color:;
-	font-family: 'Alata';
-	width: 140px;
-	height: 40px;
-	font-size: 26px;
-	float: left;
-	margin: 30px 0px 0px 70px;
-	color :white;
-	z-index: 10;
-	position: relative;
-}
-
-#fond_accueil #recherche_fleche_3 {
-
-	background-color: #ff1c1c ;
-	width: 70.5px;
-	height: 70.5px;
-	float: left;
-	margin: 0px 0px 0px 150px;
-	transform: rotate(45deg) translateX(-29px) translateY(-50px);
-	border-top: 2px solid #ff1c1c ;
-	border-right: 2px solid #ff1c1c ;
-	z-index: 1;
-	position: relative;
-}
-
------------------*/
-
-/*--------------------------- transition ---------------------------*/
-
-#transition_section {
+aside {
 	background-color: #f3f3f3;
 	float: left;
 	width: 100%;
 	height: 200px;
 }
 
-#transition_section h2 {
+aside h2 {
 	font-family: 'RobotoSlab';
 	width: 60%;
 	height: 80px;
@@ -444,10 +401,10 @@ to {-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px) ;
 	margin: 60px 0px 0px 20%;
 }
 
-/*--------------------------- Stages ---------------------------*/
+/*--------------------------------------------- Stages ---------------------------------------------*/
 
 section {
-	background-color: white;
+	background-color: ;
 	width:100%;
 	height: 1000px;
 }
@@ -468,7 +425,33 @@ section .accueil_stage:hover {
 }
 
 section #stage_info {
-	background-color: #545454;
+	background-color: #004976;
+}
+
+section #stage_info h2 {
+	width: 90%;
+	text-align: center;
+	font-size: 22px;
+	color: white;
+	height: 20%;
+	background-color:;
+	font-family: 'RobotoSlab';
+	font-weight: normal;
+	margin: 10% 0px 30% 5%;
+}
+
+section #stage_info a {
+	display: block;
+	width: 80%;
+	background-color: white;
+	color:  #004976;
+	height: 10%;
+	padding-top: 3%;
+	font-size: 20px;
+	text-align: center;
+	vertical-align: center;
+	margin: 10% 0px 0px 10%;
+	font-family: 'Alata';
 }
 
 section .accueil_stage_logo {
@@ -496,7 +479,6 @@ section .accueil_stage_etoile {
 	height: 20px;
 	margin-top: 30px;
 }
-
 
 section .accueil_stage .accueil_stage_etoile img {
 	display: block;
@@ -567,4 +549,113 @@ section .accueil_stage time {
 
 }
 
+section #stage_populaire {
+	background-color: ;
+	height: 500px;
+	display: block;
+	width: 1710px;
+	margin:200px auto 0px auto;
+}
+
+section .accueil_stage:nth-child(1) {
+	margin-left: 0px;
+}
+
+section #stage_visite {
+	background-color: ;
+	height: 500px;
+	display: block;
+	width: 1710px;
+	margin:0px auto 0px auto;
+}
+
+/*---------------------------------------------------------- footer ----------------------------------------------------------*/
+
+footer {
+	width: 100%;
+	height: 200px;
+	background-color: #004976;
+}
+
+/*---------------------------------------------------------- media queries ----------------------------------------------------------*/
+
+@media screen and (max-width: 1800px) {
+	section #stage_populaire {
+		background-color: ;
+		width: 1358px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1448px) {
+	section #stage_populaire {
+		width: 1006px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+		section .accueil_stage:nth-child(4) {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1096px) {
+	section #stage_populaire {
+		width: 654px;
+		height: 950px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+	section .accueil_stage:nth-child(4) {
+		display: block;
+	}
+	section .accueil_stage:nth-child(3) {
+		margin-left: 0px;
+	}
+	section {
+		height: 1904px;
+	}
+}
+
+
+@media screen and (max-width: 1800px) {
+	section #stage_visite {
+		background-color: ;
+		width: 1358px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1448px) {
+	section #stage_visite {
+		width: 1006px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+		section .accueil_stage:nth-child(4) {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1096px) {
+	section #stage_visite {
+		width: 654px;
+		height: 950px;
+	}
+	section .accueil_stage:nth-child(5) {
+		display: none;
+	}
+	section .accueil_stage:nth-child(4) {
+		display: block;
+	}
+	section .accueil_stage:nth-child(3) {
+		margin-left: 0px;
+	}
+}
 
