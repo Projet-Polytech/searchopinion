@@ -1,0 +1,354 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+    outline: none;
+}
+
+@font-face{
+    font-family: 'Yantra';
+    src: url('font/Yantramanav-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Arvo';
+    src: url('font/Arvo-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'Patua';
+    src: url('font/PatuaOne-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Roboto';
+    src: url('font/Roboto-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Lato';
+    src: url('font/Lato-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Alata';
+    src: url('font/Alata-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'RobotoSlab';
+    src: url('font/RobotoSlab-Light.ttf');
+}
+
+input:focus {
+    outline:  none;
+}
+
+
+/*---------------------------------------------------------- header ----------------------------------------------------------*/
+
+body{
+    display:grid;
+    grid-template-columns:1fr 1000px 1fr; /* 4 colonnes de largeur = */
+    grid-template-rows:101px 2000px 200px; /* 3 rangées */
+    background-color: white;
+}
+
+header{
+    grid-column: span 4;
+    background-color:white;
+    display:grid;
+
+    grid-template-columns:120px 130px 1fr 160px 160px 160px; /* 4 colonnes de largeur = */
+    grid-template-rows:101px 1000px 200px;
+
+    border-bottom: 1px solid #cdcdcd;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+}
+
+header div > a{
+    align-items:baseline;
+    display:flex;
+    font-size: 22px;
+    font-family: 'Alata';
+    color:#243042;
+    background-color: ;
+}
+
+header div a img {
+    width: 14px;
+    height:14px;
+    margin-left: 6px;
+    transition: transform 400ms ease-out;
+}
+
+header div a:hover img {
+    background-color:;
+    transform: rotate(90deg);
+}
+
+
+header #header_logo {
+}
+
+header #header_Connexion {
+    grid-area: 1/5/1/6;
+}
+
+header #header_Compte {
+    grid-area: 1/4/1/5;
+}
+
+header #header_logo img{
+    display: block;
+    height: 70px;
+    border-radius: 3px;
+    margin: 0px 15px 0px 15px;
+}
+
+header #header_Publier {
+    grid-area: 1/6/1/7;
+}
+
+header #header_Publier a{
+    padding: 9px 14px 9px 9px;
+    border-radius: 3px;
+    align-items:center;
+    color: white;
+    background-color: #ff1c1c ;
+    transition: background-color 400ms;
+}
+
+header #header_Publier a img{
+    padding-right: 11px;
+    padding-left: 3px;
+    width: 20px;
+    height:20px;
+    margin: 0px;
+}
+
+header #header_Publier a:hover {
+    background-color: #ab0000 ;
+    
+}
+
+header #header_Publier a:hover img{
+    transform:none;
+}
+
+
+
+
+#page_avis {
+    background-color:;
+    grid-area: 2/2/3/3;
+    display:grid;
+    grid-template-columns:200px 1fr; /* 4 colonnes de largeur = */
+    grid-template-rows:100px  1fr; /* 3 rangées */
+}
+
+section {
+    grid-area: 2/2/3/3;
+}
+
+aside:nth-of-type(1) {
+
+    grid-area: 1/1/2/3;
+    background-color:#f3f3f3;
+}
+
+#avis_filtre{
+    border:solid 1px  #cdcdcd;
+    grid-area: 2/1/3/2;
+    margin-top: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+#avis_filtre h2 {
+    font-family: 'Alata';
+    font-weight: normal;
+    font-size: 20px;
+    background-color:;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-bottom:solid 1px  #cdcdcd;
+}
+
+section #tri_stage {
+    height: 36px;
+    background-color: white;
+    grid-area: 2/2/3/3;
+    width: 90%;
+    display: flex;
+    justify-content:;
+    align-items: stretch;
+    border-radius: 4px;
+    margin: 10px 0px 10px 5%;
+    border: 1px solid #004976;
+}
+
+section #tri_stage input {
+    background-color:white;
+    border: none;
+    width: 25%;
+    font-size: 16px;
+    font-family: 'Alata';
+    color: #004976;
+    border-right: 1px solid #004976;
+
+}
+
+section #tri_stage input:nth-child(4) {
+    background-color:  #004976;
+    color: white;
+    border:none;
+}
+
+section #tri_stage input:nth-child(1) {
+    border-radius: 4px 0px 0px 4px;
+}
+
+section .avis_stage {
+    width: 96%;
+    height: 300px;
+    background-color: white;
+    display: grid;
+    grid-template-columns:140px 200px auto ; /* 4 colonnes de largeur = */
+    grid-template-rows:140px  auto;
+    grid-area: 2/2/3/3;
+    border:solid 1px  #cdcdcd;
+    border-radius: 4px;
+    margin-left: 2%;
+}
+
+section .avis_stage_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 1/1/2/2;
+
+}
+
+section .avis_stage .avis_stage_logo img{
+    display: block;
+    height: 98px;
+    background-color:;
+    border: solid 1px black;
+    border-radius: 4px;
+}
+
+section #testavis {
+    grid-area: 1/2/2/3;
+}
+
+section #testavis h1 {
+    background-color: ;
+    height: 20px;
+    padding-left: 20px;
+    display: flex;
+    margin-top: 30px;
+    font-family: 'Patua';
+    font-weight: normal;
+    font-size:30px;
+    align-items: center;
+}
+
+section iframe {
+    grid-area: 2/1/3/3;
+    height: 140px;
+    width: 280px;
+    border-radius: 4px;
+    margin-left: 20px;
+}
+
+section .avis_stage_etoile {
+    height: 20px;
+    padding-left: 0px;
+    display: flex;
+    margin-top: 30px;
+    background-color: ;
+    flex-flow: row nowrap;
+}
+
+section .avis_stage_etoile img {
+    height: 20px;
+    margin-right: 10px;
+}
+
+section .avis_stage .avis_stage_info {
+    height: 20px;
+    margin: 12px 0px 0px 20px;
+    vertical-align: middle;
+    font-family: 'Alata';
+    color:#545454;
+    display: flex;
+}
+
+section .avis_stage .avis_stage_info img{
+    height: 18px;
+    margin-right: 12px;
+    margin-top: 3px;
+}
+
+section #testavis_2 {
+    grid-area: 1/3/2/4;
+    background-color:;
+}
+
+section .avis_stage_info_2 {
+    height: 20px;
+    margin: 12px 0px 0px 0px;
+    vertical-align: middle;
+    font-family: 'Alata';
+    color:#545454;
+    display: flex;
+}
+
+section  .avis_stage_info_2 img{
+    height: 18px;
+    margin-right: 12px;
+    margin-top: 3px;
+}
+
+section .avis_stage p {
+    grid-area: 2/3/3/4;
+    background-color: ;
+    color:#545454;
+    font-family: 'Alata';
+    line-height: 22px;
+    width: 90%;
+    font-size: 14px;
+    margin: 0px 5% 0px 0%;
+    height: 140px;
+}
+
+section .avis_stage p img {
+    width: 14px;
+    height: 14px;
+    margin: 0px 10px 0px 10px;
+}
+
+section time {
+    background-color: blue;
+}
+
+footer {
+    background-color:  #004976;
+    grid-column: span 4;
+}
+
+
+
+
+
