@@ -48,7 +48,7 @@ input:focus {
 }
 
 
-/*---------------------------------------------------------- header ----------------------------------------------------------*/
+/*---------------------------------------------------------- body ----------------------------------------------------------*/
 
 body{
     display:grid;
@@ -57,12 +57,14 @@ body{
     background-color: white;
 }
 
+/*---------------------------------------------------------- header ----------------------------------------------------------*/
+
 header{
     grid-column: span 4;
-    background-color:white;
+    background-color:#6b7482;
     display:grid;
 
-    grid-template-columns:120px 130px 1fr 160px 160px 160px; /* 4 colonnes de largeur = */
+    grid-template-columns:120px 130px 1fr 160px 160px 160px;
     grid-template-rows:101px 1000px 200px;
 
     border-bottom: 1px solid #cdcdcd;
@@ -78,7 +80,7 @@ header div > a{
     display:flex;
     font-size: 22px;
     font-family: 'Alata';
-    color:#243042;
+    color:white;
     background-color: ;
 }
 
@@ -143,26 +145,62 @@ header #header_Publier a:hover img{
     transform:none;
 }
 
+/* 4 -------------------------------------------- test -------------------------------------------- */
 
+#page_test {
+    grid-area:2/1/3/2;
+    background-color: ;
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 60px 1fr;
 
+}
+
+.page_test_test{
+    grid-area:1/1/2/2;
+    background-color:#f3f3f3;
+}
+
+#bord_droit {
+    grid-area:2/3/3/4;
+    background-color: ;
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 60px 1fr;
+}
+
+/* 4 -------------------------------------------- page avis -------------------------------------------- */
 
 #page_avis {
     background-color:;
     grid-area: 2/2/3/3;
     display:grid;
     grid-template-columns:200px 1fr; /* 4 colonnes de largeur = */
-    grid-template-rows:100px  1fr; /* 3 rangées */
+    grid-template-rows:60px  1fr; /* 3 rangées */
 }
 
 section {
     grid-area: 2/2/3/3;
 }
 
+/* ---------------------------------- résumé recherche ---------------------------------- */
+
 aside:nth-of-type(1) {
 
     grid-area: 1/1/2/3;
     background-color:#f3f3f3;
+    display: flex;
+    align-items: center;
+    font-family: 'Alata';
+    color: black;
 }
+
+aside:nth-of-type(1) p img {
+    width:12px;
+    padding:0px 5px 0px 5px;
+}
+
+/* ---------------------------------- filtres ---------------------------------- */
 
 #avis_filtre{
     border:solid 1px  #cdcdcd;
@@ -170,7 +208,7 @@ aside:nth-of-type(1) {
     margin-top: 10px;
     border-radius: 4px;
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
 }
 
 #avis_filtre h2 {
@@ -184,6 +222,78 @@ aside:nth-of-type(1) {
     justify-content: center;
     border-bottom:solid 1px  #cdcdcd;
 }
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 30px 0px 16px 10%;
+  width: 80%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 90%;
+  height: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #bab8b8;
+}
+input[type=range]::-webkit-slider-thumb {
+    border:none;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 8px -3px #000000;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+input[type=range]::-moz-range-track {
+  width: 90%;
+  height: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #bab8b8;
+}
+input[type=range]::-moz-range-thumb {
+    border:none;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 8px -3px #000000;
+}
+
+
+#avis_filtre form div {
+    background-color: ;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+     font-family: 'Alata';
+    font-weight: normal;
+    font-size: 14px;
+}
+
+#avis_filtre form div p:nth-of-type(1) {
+    background-color: ;
+    width: 20%;
+    text-align: right;
+    margin-left: 6%;
+}
+
+#avis_filtre form div p:nth-of-type(2) {
+    background-color: ;
+    width: 20%;
+    margin-right: 6%;
+
+}
+
+/* ---------------------------------- tri ---------------------------------- */
 
 section #tri_stage {
     height: 36px;
@@ -219,17 +329,20 @@ section #tri_stage input:nth-child(1) {
     border-radius: 4px 0px 0px 4px;
 }
 
+
+/* ---------------------------------- stage ---------------------------------- */
+
 section .avis_stage {
     width: 96%;
     height: 300px;
     background-color: white;
     display: grid;
-    grid-template-columns:140px 200px auto ; /* 4 colonnes de largeur = */
+    grid-template-columns:140px 200px auto ; 
     grid-template-rows:140px  auto;
     grid-area: 2/2/3/3;
     border:solid 1px  #cdcdcd;
     border-radius: 4px;
-    margin-left: 2%;
+    margin:0px 0px 14px 2% ;
 }
 
 section .avis_stage_logo {
@@ -248,11 +361,11 @@ section .avis_stage .avis_stage_logo img{
     border-radius: 4px;
 }
 
-section #testavis {
+section .avis_stage_gauche {
     grid-area: 1/2/2/3;
 }
 
-section #testavis h1 {
+section .avis_stage_gauche h1 {
     background-color: ;
     height: 20px;
     padding-left: 20px;
@@ -301,7 +414,7 @@ section .avis_stage .avis_stage_info img{
     margin-top: 3px;
 }
 
-section #testavis_2 {
+section #avis_stage_droit {
     grid-area: 1/3/2/4;
     background-color:;
 }
@@ -339,9 +452,7 @@ section .avis_stage p img {
     margin: 0px 10px 0px 10px;
 }
 
-section time {
-    background-color: blue;
-}
+/*---------------------------------------------------------- footer ----------------------------------------------------------*/
 
 footer {
     background-color:  #004976;
