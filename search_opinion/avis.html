@@ -45,9 +45,12 @@
  	<aside id="avis_filtre">
  		<h2>Filtres</h2>
  		<form >
+ 			<h3>Salaire</h3>
  			<input type="range" name="amountRange" step="10" min="1200" max="2000" value="1200" oninput="num.value = this.value">
    		
     		<div><p><output id="num">1200</output>€</p><p>2000€</p></div>
+
+    		<h3>Salaire</h3>
     		
  		</form>
  	</aside>
@@ -56,10 +59,11 @@
  		
 
  		<div id="tri_stage">
- 			<input type="button" name="" value=" trier par sujet">
- 			<input type="button" name="" value="accessibilité">
- 			<input type="button" name="" value="ambiance">
- 			<input type="button" name="" value="encadrement">
+ 			<input type="button" name="btnsujet" value="sujet" class="selectbtntri">
+ 			<input type="button" name="btnaccessibilite" value="accessibilité" class="nonselectbtntri">
+ 			<input type="button" name="btnambiance" value="ambiance" class="nonselectbtntri">
+ 			<input type="button" name="btnencadrement" value="encadrement" class="nonselectbtntri">
+
  		</div>
 
  		<div class="avis_stage">
@@ -126,6 +130,76 @@
  	</div>
 
  	<footer></footer>
+
+<script type="text/javascript">
+  // <![CDATA[
+
+var btnsujet = document.querySelector("input[name='btnsujet']");
+var btnaccessibilite = document.querySelector("input[name='btnaccessibilite']");
+var btnambiance = document.querySelector("input[name='btnambiance']");
+var btnencadrement = document.querySelector("input[name='btnencadrement']");
+var classementouest = document.querySelector("#classementouest");
+var classementest = document.querySelector("#classementest");
+
+btnsujet.addEventListener('click', updatebtnsujet);
+btnaccessibilite.addEventListener('click', updatebtnaccessibilite);
+btnambiance.addEventListener('click', updatebtnambiance);
+btnencadrement.addEventListener('click', updatebtnbtnencadrement);
+
+function updatebtnsujet() {
+  if (btnsujet.className === "nonselectbtntri") {
+
+    btnsujet.className = "selectbtntri";
+    btnaccessibilite.className = "nonselectbtntri";
+    btnambiance.className = "nonselectbtntri";
+    btnencadrement.className = "nonselectbtntri";
+
+    classementouest.className = "selectpage";
+    classementest.className = "nonselectpage";
+  }
+} 
+
+function updatebtnaccessibilite() {
+  if (btnaccessibilite.className === "nonselectbtntri") {
+
+    btnsujet.className = "nonselectbtntri";
+    btnaccessibilite.className = "selectbtntri";
+    btnambiance.className = "nonselectbtntri";
+    btnencadrement.className = "nonselectbtntri";
+
+    classementouest.className = "selectpage";
+    classementest.className = "nonselectpage";
+  }
+} 
+
+function updatebtnambiance() {
+  if (btnambiance.className === "nonselectbtntri") {
+
+    btnsujet.className = "nonselectbtntri";
+    btnaccessibilite.className = "nonselectbtntri";
+    btnambiance.className = "selectbtntri";
+    btnencadrement.className = "nonselectbtntri";
+
+    classementouest.className = "selectpage";
+    classementest.className = "nonselectpage";
+  }
+} 
+
+function updatebtnbtnencadrement() {
+  if (btnencadrement.className === "nonselectbtntri") {
+
+    btnsujet.className = "nonselectbtntri";
+    btnaccessibilite.className = "nonselectbtntri";
+    btnambiance.className = "nonselectbtntri";
+    btnencadrement.className = "selectbtntri";
+
+    classementouest.className = "selectpage";
+    classementest.className = "nonselectpage";
+  }
+} 
+  // ]]>
+
+</script>
 
 </body>
 	

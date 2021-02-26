@@ -34,10 +34,37 @@
 		<h2>Rechercher les stages selon des critères<br>Et selon d'autres critères</h2>
 		<div id="recherche_global">
 			<form action="recherche.php" method="post">
+
 				<div id="recherche">
 					<div id="recherche_localisation">Localisation<img src="image/logo_localisation_2.png"></div>
-					<input type="text" name="recherche" size="30" list="liste_all"placeholder="ex : Paris">
-
+					<select multiple class="chosen" name="select[]" style="width:300px;">
+				        <optgroup label="fruit">
+				            <option value="1">apples</option>
+				            <option value="2">pears</option>
+				        </optgroup>
+				        <optgroup label="veg">
+				            <option value="3">neeps</option>
+				            <option value="4">tatties</option>
+				        </optgroup>
+				        <optgroup label="omnivore">
+				            <option value="5">bear</option>
+				            <option value="6">rats</option>
+				            <option value="7">bear</option>
+				            <option value="8">rats</option>
+				            <option value="9">bear</option>
+				            <option value="10">rats</option>
+				        </optgroup>
+    				</select>
+	 				<!-- Connexion à la base de données -->
+					<?php include("connexion_bdd.php");
+					// Sélection des titres de musique, nom des artistes, nom des pays et nom des styles musicaux pour faciliter la recherche
+						$lieux = $bdd->query('SELECT lieu FROM localisation');
+						//echo '<option value="Toute localisation">';
+						while($lieu = $lieux->fetch()) {
+							//echo '<option value="' . $lieu['lieu'] . '">';
+						}
+						$lieux->closeCursor(); ?>
+					
 				</div>
 				<div id="recherche_2">
 					<div id="recherche_domaine">Domaine<img src="image/logo_domaine.png"></div>
