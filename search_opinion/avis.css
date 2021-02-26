@@ -347,7 +347,51 @@ footer {
     background-color:  #004976;
     grid-column: span 4;
 }
+/* Page create account */
 
+#create_account {
+    display: grid;
+    grid-area: 2/2/3/3;
+    background-color: #f3f3f3;
+    font-family: 'Lato';    
+}
+#create_account form {
+    grid-area: 1/2/3/3;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+#create_account .label {
+    font-family: 'Alata';
+    margin: 1%;
+}
+.formule {
+    outline: none;
+    width: 50%;
+    height: 35px;
+    box-sizing: border-box;
+}
+#create_account strong {
+    background-color: #c1c1c1;
+    color: white;
+    border-radius: 5px;
+    border: black;
+    padding: 2px;
+    font-size: 13px;
+}
+#text_info {
+    display: none;
+    font-family: 'Lato';
+    font-size: 15px;
+    background-color: white;
+    border: 2px outset black;
+    border-radius: 8px;
+    width: 25%;
+    display: block;
+    position: absolute;
+    padding: 2px;
+}
 
 
 
