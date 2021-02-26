@@ -12,6 +12,7 @@ Project ongoing...
 ### Technologies
 * HTML5/CSS3
 * PHP
+* Javascript
 ***
 ### Installation
 ***
