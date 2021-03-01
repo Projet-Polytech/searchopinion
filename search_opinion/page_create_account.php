@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8"/>
-	<link  href="autre.css" rel="stylesheet" type="text/css" media="all">
+	<link  href="avis.css" rel="stylesheet" type="text/css" media="all">
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
@@ -28,11 +28,11 @@
 	</header>
 	<div id="create_account">
 		<form action="script_create_account.php" method="POST" >
-			<div><label><div class="label">Adresse mail (étudiante): <span id="interrogation" data-descr="Nous vous conseillons de rediriger votre adresse mail étudiante vers une boîte mail personnelle pour simplifier les échanges. Vous pouvez faire cela sur CELENE via l'onglet &quot;Redirection boîte mail&quot;.">?</span></div><input class="formule" id="mail" type="text" name="mail" pattern="[a-z0-9\.-]{3,}" minlength="5" maxlength="35" placeholder=" ex : prenom.nom" title="Votre adresse mail" required autofocus>@etu.univ-tours.fr</label></div>
+			<div><label><div class="label">Adresse mail (étudiante): <span class="interrogation" data-descr="Nous vous conseillons de rediriger votre adresse mail étudiante vers une boîte mail personnelle pour simplifier les échanges. Vous pouvez faire cela sur CELENE via l'onglet &quot;Redirection boîte mail&quot;.">?</span></div><input class="formule" id="mail" type="text" name="mail" pattern="[a-z0-9\.-]{3,}" minlength="5" maxlength="35" placeholder=" ex : prenom.nom" title="Votre adresse mail" required autofocus>@etu.univ-tours.fr</label></div>
 			<div><label><div class="label">Nom : </div><div id="auto_nom"></div><input class="formule" id="nom" type="text" name="nom" placeholder="Nom" title="Votre nom" ></label></div>
 			<div><label><div class="label">Prénom : </div><div id="auto_prenom"></div><input class="formule" id="prenom" type="text" name="prenom" placeholder="Prénom" title="Votre prénom" ></label></div>
-			<div><label><div class="label">Mot de passe : </div><input class="formule" type="password" name="mdp" id="mdp" placeholder="Mot de passe" title="Créez un mot de passe" required></label></div>
-			<div><p><input type="submit" name="envoyer" value="S'inscrire" id="inscrire" /></p></div>
+			<div><label><div class="label">Mot de passe : <span class="interrogation" data-descr="Nous vous conseillons de ne pas utiliser un même mot de passe sur plusieurs sites.">?</span></div><input class="formule" type="password" name="mdp" id="mdp" placeholder="Mot de passe" title="Créez un mot de passe" required></label></div>
+			<div><p><input type="submit" name="envoyer" value="Valider" id="inscrire" /></p></div>
 		</form>
 	</div>
 	<!-- Partie Javascript -->
@@ -75,16 +75,6 @@
 
 			const surname = document.getElementById('prenom');
 			surname.setAttribute('value', prenom);
-		});
-		//apparition du texte informatif au passage de la souris sur le point d'interrogation
-		const interrogation = document.getElementById("interrogation");
-		interrogation.addEventListener('mouseover', function() {
-			const text_info = document.getElementById("text_info");
-			text_info.style.display = 'contents';
-		});
-		interrogation.addEventListener('mouseout', function() {
-			const text_info = document.getElementById("text_info");
-			text_info.style.display = 'none';
 		});
 	</script>
 </body>
