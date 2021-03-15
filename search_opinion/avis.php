@@ -1,3 +1,54 @@
+<?php
+
+/*-------------------------------------------------- fonctions ----------------------------------------------------------*/
+
+function convertisseur_note_etoile($note) {
+
+	$note_etoile = '';
+	$etoile_full = '<img src=\'image/etoile_full.png\'>';
+	$etoile_null = '<img src=\'image/etoile_null.png\'>';
+	$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
+
+	for ($nbr=0; $nbr < 5; $nbr++) { 
+
+		if ($note == 0) {
+			$note_etoile .= $etoile_null;
+		}
+
+		if (($note <= 4) and ($note > 0)) {
+			$note = 0;
+			$note_etoile .= $etoile_demi;
+		}
+
+		if ($note >= 8) {
+			$note -= 8;
+			$note_etoile .= $etoile_full;
+		}
+	}
+
+	return $note_etoile;
+}
+
+
+function maj_filtre () {
+	$bdd = new PDO('mysql:host=localhost;port=3307;dbname=site_polytech;charset=utf8', 'root', '');
+	$reponse = $bdd->query('SELECT salaire FROM avis');
+	$note = array();
+    while ($donnees = $reponse->fetch()) {
+    	$note[] = $donnees['salaire'];
+    }
+    $minmax =array(min($note),max($note));
+    return ($minmax);
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -44,11 +95,15 @@
 
  	<aside id="avis_filtre">
  		<h2>Filtres</h2>
- 		<form >
+ 		<form method="get" action="avis.php">
  			<h3>Salaire</h3>
- 			<input type="range" name="amountRange" step="10" min="1200" max="2000" value="1200" oninput="num.value = this.value">
+ 			<input type="range" name="amountRange" step="10" oninput="num.value = this.value"
+ 			value = <?php echo '\''.maj_filtre()[0].'\'' ?>
+ 			min = <?php echo '\''.maj_filtre()[0].'\'' ?>
+ 			max = <?php echo '\''.maj_filtre()[1].'\'' ?>
+ 			>
    		
-    		<div><p><output id="num">1200</output>€</p><p>2000€</p></div>
+    		<div><p><output id="num"><?php echo maj_filtre()[0] ?></output>€</p><p><?php echo maj_filtre()[1] ?>€</p></div>
 
     		<div class="demarcation"></div>
 
@@ -78,12 +133,13 @@
  		
 
  		<div id="tri_stage">
- 			<input type="button" name="btnsujet" value="sujet" class="selectbtntri">
+ 			<input type="button" name="btnsujet" value="intérêt sujet" class="selectbtntri">
  			<input type="button" name="btnaccessibilite" value="accessibilité" class="nonselectbtntri">
  			<input type="button" name="btnambiance" value="ambiance" class="nonselectbtntri">
  			<input type="button" name="btnencadrement" value="encadrement" class="nonselectbtntri">
 
  		</div>
+ 		
 
 <?php
 
@@ -95,31 +151,72 @@ catch (Exception $e) {
     die('Erreur z(hsrthsrth: ' . $e->getMessage());
 }
 
-$reponse1 = $bdd->query('SELECT domaine, titre, note_globale, fk_localisation, salaire, duree, avis FROM avis');
+$etoile_full = '<img src=\'image/etoile_full.png\'>';
+$etoile_null = '<img src=\'image/etoile_null.png\'>';
+$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
-while ($donnees = $reponse1->fetch())
-{
-	$domaine = $donnees['domaine'];
 
-	$titre = $donnees['titre'];
+$requete =array(
 
-	$note_globale = $donnees['note_globale'];
+'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+FROM avis a
+INNER JOIN entreprises e
+ON a.fk_num_siret = e.num_siret
+ORDER BY note_interet DESC, note_globale DESC',
 
-	$fk_localisation = $donnees['fk_localisation'];
+'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+FROM avis a
+INNER JOIN entreprises e
+ON a.fk_num_siret = e.num_siret
+ORDER BY note_accessibilite DESC, note_globale DESC',
 
-	$salaire = $donnees['salaire'];
+'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+FROM avis a
+INNER JOIN entreprises e
+ON a.fk_num_siret = e.num_siret
+ORDER BY note_accueil DESC, note_globale DESC',
 
-	$duree = $donnees['duree'];
+'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+FROM avis a
+INNER JOIN entreprises e
+ON a.fk_num_siret = e.num_siret
+ORDER BY note_encadrement DESC, note_globale DESC'
 
-	$avis = $donnees['avis'];
+);
 
-}
 
-$reponse1->closeCursor();
+for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
-echo 
+    if ($nombre_de_tri == 0) {
+    	echo     '<div id=\'avis_stage_tri_'.$nombre_de_tri.'\' class =\'selectpage\'>';
+    }
+    else {
+    	echo     '<div id=\'avis_stage_tri_'.$nombre_de_tri.'\' class =\'nonselectpage\'>';
+    }
 
-'<div class=\'avis_stage avis_stage_ordre_2\'>
+    $reponse1 = $bdd->query($requete[$nombre_de_tri]);
+
+    while ($donnees = $reponse1->fetch()) {
+
+		$domaine = $donnees['domaine'];
+
+		$note_globale = $donnees['note_globale'];
+
+		$fk_localisation = $donnees['fk_localisation'];
+
+		$salaire = $donnees['salaire'];
+
+		$duree = $donnees['duree'];
+
+		$avis = $donnees['avis'];
+
+		$titre = $donnees['nom'];
+
+
+
+		echo 
+	   
+	    	'<div class=\'avis_stage \'>
 				<div class=\'avis_stage_logo\'><img src=\'image/logo_accueil.webp\'></div>
 
 					<div class=\'avis_stage_gauche\'>
@@ -134,7 +231,7 @@ echo
 				<div class=\'avis_stage_droit\'>
 
 				
-					<div class=\'avis_stage_etoile\'><img src=\'image/etoile_1.png\'><img src=\'image/etoile_1.png\'><img src=\'image/etoile_1.png\'><img src=\'image/etoile_2.png\'><img src=\'image/etoile_2.png\'></div>
+					<div class=\'avis_stage_etoile\'>'.convertisseur_note_etoile($note_globale).'</div>
 
 					<div class=\'avis_stage_info_2\'><img src=\'image/calendrier.png\'>'.$duree.' semaines</div>
 					<div class=\'avis_stage_info_2\'><img src=\'image/logo_billet_2.png\'>'.$salaire.' €</div>
@@ -145,13 +242,23 @@ echo
 
 				
 				<p><img src=\'image/guillemet_inv.png\'>'.substr($avis, 0,340).'...<img src=\'image/guillemet.png\'></p>
-		</div>';
+			</div>';
+	}
 
+	$reponse1->closeCursor();
 
+	echo '</div>';
+
+}
 
 ?>
 
-		<div class="avis_stage avis_stage_ordre_1">
+<?php
+
+/*
+
+	<div id="avis_stage_tri_2" class="nonselectpage">
+		<div class="avis_stage ">
 				<div class="avis_stage_logo"><img src="image/logo_accueil.webp"></div>
 
 					<div class="avis_stage_gauche">
@@ -206,10 +313,10 @@ echo
 				
 				<p><img src="image/guillemet_inv.png">Encore un extrait du début de l'avis sur un autre stage pour test. Dans l'idéale on met là aussi 4-5 lignes pour donner envie de lire la suite. Cette fois extrait plus long donc au moins 10 lignes pour que ça remplisse Vous êtes à la recherche d’une offre de stage ? StudentJob vous propose de nombreuses annonces de stage dans la vente ...<img src="image/guillemet.png"></p>
 		</div>
-
-
+	</div>
+*/
+?>
 		
-
  	</section>
 
  	</div>
@@ -223,8 +330,10 @@ var btnsujet = document.querySelector("input[name='btnsujet']");
 var btnaccessibilite = document.querySelector("input[name='btnaccessibilite']");
 var btnambiance = document.querySelector("input[name='btnambiance']");
 var btnencadrement = document.querySelector("input[name='btnencadrement']");
-var classementouest = document.querySelector("#classementouest");
-var classementest = document.querySelector("#classementest");
+var tri_0 = document.querySelector("#avis_stage_tri_0");
+var tri_1 = document.querySelector("#avis_stage_tri_1");
+var tri_2 = document.querySelector("#avis_stage_tri_2");
+var tri_3 = document.querySelector("#avis_stage_tri_3");
 
 btnsujet.addEventListener('click', updatebtnsujet);
 btnaccessibilite.addEventListener('click', updatebtnaccessibilite);
@@ -239,8 +348,10 @@ function updatebtnsujet() {
     btnambiance.className = "nonselectbtntri";
     btnencadrement.className = "nonselectbtntri";
 
-    classementouest.className = "selectpage";
-    classementest.className = "nonselectpage";
+    tri_0.className = "selectpage";
+    tri_1.className = "nonselectpage";
+    tri_2.className = "nonselectpage";
+    tri_3.className = "nonselectpage";
   }
 } 
 
@@ -252,8 +363,10 @@ function updatebtnaccessibilite() {
     btnambiance.className = "nonselectbtntri";
     btnencadrement.className = "nonselectbtntri";
 
-    classementouest.className = "selectpage";
-    classementest.className = "nonselectpage";
+    tri_0.className = "nonselectpage";
+    tri_1.className = "selectpage";
+    tri_2.className = "nonselectpage";
+    tri_3.className = "nonselectpage";
   }
 } 
 
@@ -265,8 +378,10 @@ function updatebtnambiance() {
     btnambiance.className = "selectbtntri";
     btnencadrement.className = "nonselectbtntri";
 
-    classementouest.className = "selectpage";
-    classementest.className = "nonselectpage";
+    tri_0.className = "nonselectpage";
+    tri_1.className = "nonselectpage";
+    tri_2.className = "selectpage";
+    tri_3.className = "nonselectpage";
   }
 } 
 
@@ -278,8 +393,10 @@ function updatebtnbtnencadrement() {
     btnambiance.className = "nonselectbtntri";
     btnencadrement.className = "selectbtntri";
 
-    classementouest.className = "selectpage";
-    classementest.className = "nonselectpage";
+    tri_0.className = "nonselectpage";
+    tri_1.className = "nonselectpage";
+    tri_2.className = "nonselectpage";
+    tri_3.className = "selectpage";
   }
 } 
   // ]]>

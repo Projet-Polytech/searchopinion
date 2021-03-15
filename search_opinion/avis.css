@@ -53,7 +53,7 @@ input:focus {
 body{
     display:grid;
     grid-template-columns:1fr 1000px 1fr; /* 4 colonnes de largeur = */
-    grid-template-rows:101px 2000px 200px; /* 3 rangées */
+    grid-template-rows:101px 1fr 200px; /* 3 rangées */
     background-color: white;
 }
 
@@ -430,6 +430,34 @@ section #tri_stage .nonselectbtntri {
 
 
 /* ---------------------------------- stage ---------------------------------- */
+section #avis_stage_tri_0 {
+    width: 100%;
+    grid-area: 2/2/3/3;
+
+}
+
+section #avis_stage_tri_1 {
+    width: 100%;
+    grid-area: 2/2/3/3;
+}
+
+section #avis_stage_tri_2 {
+    width: 100%;
+    grid-area: 2/2/3/3;
+}
+
+section #avis_stage_tri_3 {
+    width: 100%;
+    grid-area: 2/2/3/3;
+}
+
+section .selectpage {
+    display: normal;
+}
+
+section .nonselectpage {
+    display: none;
+}
 
 section .avis_stage {
     width: 96%;
@@ -438,7 +466,7 @@ section .avis_stage {
     display: grid;
     grid-template-columns:140px 200px auto ; 
     grid-template-rows:140px  auto;
-    grid-area: 2/2/3/3;
+    
     border:solid 1px  #cdcdcd;
     border-radius: 4px;
     margin:0px 0px 14px 2% ;
