@@ -589,6 +589,18 @@ section .avis_stage p img {
     margin: 0px 10px 0px 10px;
 }
 
+section #no_result_stage {
+    width: 96%;
+    background-color: #cdcdcd;
+    height: 40px;
+    border-radius: 4px;
+    margin: 20px 0px 0px 2%;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family:'Alata';
+}
+
 /*---------------------------------------------------------- footer ----------------------------------------------------------*/
 
 section time {

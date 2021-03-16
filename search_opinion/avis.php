@@ -41,11 +41,33 @@ function maj_filtre () {
     return ($minmax);
 }
 
-/*--------------------------------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------- variables formulaire -------------------------------------------------- */
 
+$etoile_full = '<img src=\'image/etoile_full.png\'>';
+$etoile_null = '<img src=\'image/etoile_null.png\'>';
+$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
+$etoilemin = 0;
 
-/*--------------------------------------------------------------------------------------------------------------------*/
+if (isset($_POST['etoile'])) {
+	$etoilemin = $_POST['etoile'];
+}
+
+$totalcheck = array();
+
+for ($i=1; $i < 6; $i++) { 
+
+	if (isset($_POST['check'.$i])) {
+	$check = unserialize($_POST['check'.$i]);
+	$totalcheck = array_merge($totalcheck,$check);
+	}
+}
+
+if (isset($_POST['amountRange'])) {
+	$salairemin = $_POST['amountRange'];
+}
+
+/*---------------------------------------------------------- html ----------------------------------------------------------*/
 
 ?>
 
@@ -95,7 +117,7 @@ function maj_filtre () {
 
  	<aside id="avis_filtre">
  		<h2>Filtres</h2>
- 		<form method="get" action="avis.php">
+ 		<form method="post" action="avis.php">
  			<h3>Salaire</h3>
  			<input type="range" name="amountRange" step="10" oninput="num.value = this.value"
  			value = <?php echo '\''.maj_filtre()[0].'\'' ?>
@@ -109,20 +131,20 @@ function maj_filtre () {
 
     		<h3>Durée (semaine)</h3>
 
-    		<input type="checkbox" name="" value="4_et_-"><label > 4 et -</label><br>
-    		<input type="checkbox" name="" value="4 à 8"><label > 4 à 8</label><br>
-    		<input type="checkbox" name="" value="8 à 12"><label > 8 à 12</label><br>
-    		<input type="checkbox" name="" value="12 à 16"><label > 12 à 16</label><br>
-    		<input type="checkbox" name="" value="16 et +"><label > 16 et +</label><br>
+    		<input type="checkbox" name="check1" value="a:2:{i:0;i:0;i:1;i:4;}"><label > 4 et -</label><br>
+    		<input type="checkbox" name="check2" value="a:2:{i:0;i:4;i:1;i:8;}"><label > 4 à 8</label><br>
+    		<input type="checkbox" name="check3" value="a:2:{i:0;i:8;i:1;i:12;}"><label > 8 à 12</label><br>
+    		<input type="checkbox" name="check4" value="a:2:{i:0;i:12;i:1;i:16;}"><label > 12 à 16</label><br>
+    		<input type="checkbox" name="check5" value="a:2:{i:0;i:16;i:1;i:100;}"><label > 16 et +</label><br>
 
     		<div class="demarcation"></div>
 
     		<h3>Nombre d'étoiles</h3>
-    		<input type="radio" name="etoile" value="1_etoile"><label > 1 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="2_etoile"><label > 2 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="3_etoile"><label > 3 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="4_etoile"><label > 4 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="5_etoile"><label > 5 étoile</label><br>
+    		<input type="radio" name="etoile" value="1"><label > 1 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="2"><label > 2 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="3"><label > 3 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="4"><label > 4 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="5"><label > 5 étoile</label><br>
 
     		<input type="submit" name="submit_filters" value="Appliquer">
     		
@@ -143,6 +165,8 @@ function maj_filtre () {
 
 <?php
 
+/*-------------------------------------------------- connexion bd -----------------------------------------------------*/
+
 try {
 	$bdd = new PDO('mysql:host=localhost;port=3307;dbname=site_polytech;charset=utf8', 'root', '');
 }
@@ -151,10 +175,7 @@ catch (Exception $e) {
     die('Erreur z(hsrthsrth: ' . $e->getMessage());
 }
 
-$etoile_full = '<img src=\'image/etoile_full.png\'>';
-$etoile_null = '<img src=\'image/etoile_null.png\'>';
-$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
-
+/*-------------------------------------------------- requete -----------------------------------------------------*/
 
 $requete =array(
 
@@ -184,19 +205,28 @@ ORDER BY note_encadrement DESC, note_globale DESC'
 
 );
 
+/*-------------------------------------------------- tri -----------------------------------------------------*/
 
 for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
     if ($nombre_de_tri == 0) {
     	echo     '<div id=\'avis_stage_tri_'.$nombre_de_tri.'\' class =\'selectpage\'>';
     }
+
     else {
     	echo     '<div id=\'avis_stage_tri_'.$nombre_de_tri.'\' class =\'nonselectpage\'>';
     }
 
     $reponse1 = $bdd->query($requete[$nombre_de_tri]);
 
+/*-------------------------------------------------- données requete -----------------------------------------------------*/
+
+	$nbrminrequete = 0;
+	$nbrtotalrequete = 0;
+
     while ($donnees = $reponse1->fetch()) {
+
+    	$nbrtotalrequete +=1;
 
 		$domaine = $donnees['domaine'];
 
@@ -212,9 +242,32 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 		$titre = $donnees['nom'];
 
+/*-------------------------------------------------- application filtres -----------------------------------------------------*/
 
+		$nbrfor = 1;
+		for ($i=0; $i < count($totalcheck)-1; $i++) { 
+			if (($duree<$totalcheck[$i]) OR ($duree>$totalcheck[$i+1]))
+				$nbrfor += 1;
+		}
 
-		echo 
+		if ($note_globale < $etoilemin*8) {
+			echo "";
+			$nbrminrequete += 1;
+		}
+		
+		else if (count($totalcheck) == $nbrfor) {
+			echo "";
+			$nbrminrequete += 1;
+		}
+
+		else if ($salaire < $salairemin) {
+			echo "";
+			$nbrminrequete += 1;
+		}
+
+/*-------------------------------------------------- stage requete -----------------------------------------------------*/
+		else {
+			echo 
 	   
 	    	'<div class=\'avis_stage \'>
 				<div class=\'avis_stage_logo\'><img src=\'image/logo_accueil.webp\'></div>
@@ -243,9 +296,15 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 				
 				<p><img src=\'image/guillemet_inv.png\'>'.substr($avis, 0,340).'...<img src=\'image/guillemet.png\'></p>
 			</div>';
+		}
+
 	}
 
 	$reponse1->closeCursor();
+
+	if ($nbrtotalrequete == $nbrminrequete) {
+		echo '<div id=\'no_result_stage\'>Aucun Résultats trouvés, élargissez votre recherche</div>';
+	}
 
 	echo '</div>';
 
@@ -255,7 +314,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 <?php
 
-/*
+/*  -------------------------------------------------- code html stage save -----------------------------------------------------
 
 	<div id="avis_stage_tri_2" class="nonselectpage">
 		<div class="avis_stage ">
