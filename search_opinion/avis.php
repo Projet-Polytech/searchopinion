@@ -48,6 +48,7 @@ $etoile_null = '<img src=\'image/etoile_null.png\'>';
 $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
 $etoilemin = 0;
+$salairemin = 0;
 
 if (isset($_POST['etoile'])) {
 	$etoilemin = $_POST['etoile'];
