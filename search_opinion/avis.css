@@ -502,7 +502,7 @@ section .avis_stage_gauche {
     grid-area: 1/2/2/3;
 }
 
-section .avis_stage_gauche h1 {
+section .avis_stage_gauche a {
     background-color: ;
     height: 20px;
     padding-left: 0px;
@@ -512,6 +512,12 @@ section .avis_stage_gauche h1 {
     font-weight: normal;
     font-size:24px;
     align-items: center;
+    color: black;
+    transition: color 400ms;
+}
+
+section .avis_stage_gauche a:hover {
+    color: #004976;
 }
 
 section iframe {

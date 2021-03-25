@@ -1,0 +1,406 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+@font-face{
+    font-family: 'Yantra';
+    src: url('font/Yantramanav-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Arvo';
+    src: url('font/Arvo-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'Patua';
+    src: url('font/PatuaOne-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Roboto';
+    src: url('font/Roboto-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Lato';
+    src: url('font/Lato-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Alata';
+    src: url('font/Alata-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'RobotoSlab';
+    src: url('font/RobotoSlab-Light.ttf');
+}
+
+@font-face{
+    font-family: 'Notolight';
+    src: url('font/NotoSansJP-Regular.otf');
+}
+
+input:focus {
+    outline:  none;
+}
+
+
+/*---------------------------------------------------------- body ----------------------------------------------------------*/
+
+body{
+    display:grid;
+    grid-template-columns:1fr 600px 1fr; /* 3 colonnes  */
+    grid-template-rows:101px 1fr 200px; /* 3 rangées */
+    background-color: #fdfdfd;
+}
+
+/*---------------------------------------------------------- header ----------------------------------------------------------*/
+
+header{
+    grid-column: span 4;
+    background-color:#1a1d21;
+    display:grid;
+
+    grid-template-columns:120px 130px 1fr 160px 160px 160px;
+    grid-template-rows:1fr ;
+
+    border-bottom: 1px solid #1a1d21;
+
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+
+}
+
+header div > a{
+    align-items:baseline;
+    display:flex;
+    font-size: 22px;
+    font-family: 'Alata';
+    color:white;
+    background-color: ;
+}
+
+header div a img {
+    width: 14px;
+    height:14px;
+    margin-left: 6px;
+    transition: transform 400ms ease-out;
+}
+
+header div a:hover img {
+    background-color:;
+    transform: rotate(90deg);
+}
+
+
+header #header_logo {
+}
+
+header #header_Connexion {
+    grid-area: 1/5/1/6;
+}
+
+header #header_Compte {
+    grid-area: 1/4/1/5;
+}
+
+header #header_logo img{
+    display: block;
+    height: 70px;
+    border-radius: 3px;
+    margin: 0px 15px 0px 15px;
+}
+
+header #header_Publier {
+    grid-area: 1/6/1/7;
+}
+
+header #header_Publier a{
+    padding: 9px 14px 9px 9px;
+    border-radius: 3px;
+    align-items:center;
+    color: white;
+    background-color: #ff1c1c ;
+    transition: background-color 400ms;
+}
+
+header #header_Publier a img{
+    padding-right: 11px;
+    padding-left: 3px;
+    width: 20px;
+    height:20px;
+    margin: 0px;
+}
+
+header #header_Publier a:hover {
+    background-color: #ab0000 ;
+    
+}
+
+header #header_Publier a:hover img{
+    transform:none;
+}
+
+/*---------------------------------------------------------- avis ----------------------------------------------------------*/
+
+
+section {
+    grid-area:2/2/3/3;
+    width:100%;
+    height:600px;
+    margin: 100px 0px 100px 0px;
+    display: flex;
+    flex-flow: wrap column;
+}
+
+section #topcompte {
+    width:100%;
+    background-color:;
+    display:grid;
+    grid-template-columns: 1fr 80px;
+    grid-template-rows: 50px 1fr;
+    
+}
+
+section #topcompte h1 {
+    grid-area: 1/1/2/2;
+    font-family: 'Patua';
+    font-size: 30px;
+    font-weight: normal;
+    display: flex;
+    width:100%;
+    color: #191919;
+    background-color: ;
+}
+
+section h1 img {
+    height:40px;
+    margin-right:20px;
+}
+
+section p {
+    grid-area: 2/1/3/2;
+    font-family: 'Roboto';
+    font-size: 16px;
+    color: #9c9c9c;
+    margin: 10px 0px 0px 0px;
+    width: 100%;
+    background-color:;
+}
+
+section #topcompte a {
+    grid-area: 1/2/3/3;
+    display: block;
+    width: 70px;
+    height: 70px;
+    background-color: black;
+    border-radius: 100px;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.23);
+}
+
+section #topcompte a img {
+    width: 40%;
+    height: 40%;
+    margin: 30% 0px 0px 25%;
+}
+
+section h2 {
+    font-family: 'Roboto';
+    font-size:22px;
+    font-weight: normal;
+    display: flex;
+    width:100%;
+    color: #191919;
+    margin: 40px 0px 0px 0px;
+}
+
+section #block {
+    width: 100%;
+    height: 80px;
+    background-color: ;
+    margin: 20px 0px 0px 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23); 
+    box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: relative;
+}
+
+section #block form > input {
+    height: 50px;
+    width: 30%;
+    border:solid 1px #c9c7c7;
+    border-radius: 10px;
+    font-size:20px;
+    padding-left: 3%;
+    margin: 0px 0px 0px 3%;
+}
+
+/*--------------------------------------------- 1 -----------------------------------------*/
+
+section #block form input[type="password"]{
+    border:solid 1px #c9c7c7;
+    height: 40px;
+    display: flex;
+    border-radius: 4px;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+section #block form .compte_password{
+    border:solid 1px #c9c7c7;
+    transition: 0.1s; 
+    background: transparent;
+}
+
+
+section #block .compte_password ~ .label1{ 
+    position: absolute; 
+    left: 6%;  
+    top: 35%; 
+    transition: 0.3s; 
+    z-index: -1;
+    font-family: 'NotoLight';
+    font-size: 15px;
+}
+
+section #block .compte_password:focus ~ .label1, section #block  .has-content.compte_password ~ .label1{
+    left: 5%;  
+    top: 20%; 
+    font-size: 12px; 
+    transition: 0.3s;
+}
+
+section #block .compte_password:focus {
+    border: 1px solid black; 
+}
+
+/*--------------------------------------------- 2 -----------------------------------------*/
+
+section #block form .compte_password_2{
+    border:solid 1px #c9c7c7;
+    transition: 0.1s; 
+    background: transparent;
+}
+
+
+section #block .compte_password_2 ~ .label2{ 
+    position: absolute; 
+    left: 42%;  
+    top: 35%; 
+    transition: 0.3s; 
+    z-index: -1;
+    font-family: 'NotoLight';
+    font-size: 15px;
+}
+
+section #block .compte_password_2:focus ~ .label2, section #block  .has-content.compte_password_2 ~ .label2{
+    left: 41%;  
+    top: 20%; 
+    font-size: 12px; 
+    transition: 0.3s;
+}
+
+section #block .compte_password_2:focus {
+    border: 1px solid black; 
+}
+
+/*--------------------------------------------- form -----------------------------------------*/
+
+form {
+    display: flex;
+    align-items: center;
+    background-color: ;
+    padding: 0px;
+    width:100%;
+}
+
+section #block form input[type=submit] {
+    width: 16%;
+    border:solid 1px #c9c7c7;
+    height:52px;
+    background: url(image/fleche.png);
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size: 50px;
+    background-color: ;
+    transition: background-color 400ms;
+    margin: 0px 0px 0px 8%;
+}
+
+section #block form input[type=submit]:hover {
+    background-color: #dfdfdf;
+    cursor:pointer;
+}
+
+section #block2 {
+    width: 100%;
+    height: ;
+    background-color: ;
+    margin: 20px 0px 0px 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23); 
+    box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23);
+    font-family: 'Roboto2';
+    font-size:14px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    color: #373737;
+    padding:0px 0px 10px 0px;
+    flex-flow: wrap column;
+}
+
+section #block2 .stagecompte {
+    display: flex;
+    align-items: center;
+    background-color: ;
+    width: 96%;
+    height: 50px;
+    border:solid 1px #c9c7c7;
+    margin: 10px 0px 0px 0px;
+    border-radius: 4px;
+    transition: background-color 400ms;
+}
+
+section #block2 .stagecompte:hover {
+    background-color: #eaeaea;
+}
+
+section #block2 .stagecompte p {
+    color: black;
+    margin-left: 2%;
+    font-size: 15px;
+}
+
+section #block2 .stagecompte p span {
+    color: #9c9c9c;
+    margin-left: 1%;
+}
+
+section #block2 .stagecompte img {
+    width: 20px;
+    height:20px;
+    margin-right: 1%;
+}
+
+
+/*---------------------------------------------------------- footer ----------------------------------------------------------*/
+
+footer {
+    background-color:  #004976;
+    grid-column: span 4;
+}

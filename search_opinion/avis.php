@@ -31,7 +31,7 @@ function convertisseur_note_etoile($note) {
 
 
 function maj_filtre () {
-	$bdd = new PDO('mysql:host=localhost;port=3307;dbname=site_polytech;charset=utf8', 'root', '');
+	$bdd = new PDO('mysql:host=localhost;port=3306;dbname=site_polytech;charset=utf8', 'root', '');
 	$reponse = $bdd->query('SELECT salaire FROM avis');
 	$note = array();
     while ($donnees = $reponse->fetch()) {
@@ -169,7 +169,7 @@ if (isset($_POST['amountRange'])) {
 /*-------------------------------------------------- connexion bd -----------------------------------------------------*/
 
 try {
-	$bdd = new PDO('mysql:host=localhost;port=3307;dbname=site_polytech;charset=utf8', 'root', '');
+	$bdd = new PDO('mysql:host=localhost;port=3306;dbname=site_polytech;charset=utf8', 'root', '');
 }
 
 catch (Exception $e) {
@@ -180,25 +180,25 @@ catch (Exception $e) {
 
 $requete =array(
 
-'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 ORDER BY note_interet DESC, note_globale DESC',
 
-'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 ORDER BY note_accessibilite DESC, note_globale DESC',
 
-'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 ORDER BY note_accueil DESC, note_globale DESC',
 
-'SELECT  a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
@@ -228,6 +228,8 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
     while ($donnees = $reponse1->fetch()) {
 
     	$nbrtotalrequete +=1;
+
+    	$id_stage = $donnees['id_stage']; 
 
 		$domaine = $donnees['domaine'];
 
@@ -275,7 +277,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 					<div class=\'avis_stage_gauche\'>
 
-						<h1>'.$titre.'</h1>
+						<a href=avis_detail.php?id_stage='.$id_stage.'>'.$titre.'</a>
 				
 						<div class=\'avis_stage_info\'><img src=\'image/logo_domaine_black.png\'>'.$domaine.'</div>
 						<div class=\'avis_stage_info\'><img src=\'image/logo_localisation_black.png\'>'.$fk_localisation.'</div>
