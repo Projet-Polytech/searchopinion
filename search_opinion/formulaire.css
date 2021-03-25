@@ -239,6 +239,17 @@ span[data-descr]:hover::after {
 #dep {
     display: none;
 }
+#retour_depot_avis, #verified_account {
+  display: grid;
+  grid-area: 2/2/3/3;
+  background-color: #f3f3f3;
+  font-family: 'Alata';
+  font-size: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 4%;
+  color: #1a1d21;
+}
 /*---------------------------------------------------------- Page connexion ----------------------------------------------------------*/
 #connexion {
   display: grid;

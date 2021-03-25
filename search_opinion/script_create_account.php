@@ -1,18 +1,24 @@
 <?php session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'C:\\wamp64\\PHPMailer-master\\src\\Exception.php';
+require 'C:\\wamp64\\PHPMailer-master\\src\\PHPMailer.php';
+require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 	include("connexion_bdd.php");
-	//initialisation des variables
-	$mail = 0;
-	//vérification de l'unicité du compte à créer puis création du compte
+	//initializing variables
+	$uni_mail = 0;
+	//uniqueness check then creation of the account
 	if(isset($_POST['mail']) AND isset($_POST['nom']) AND isset($_POST['prenom']) AND isset($_POST['mdp'])) {
 		$email = htmlspecialchars($_POST['mail']) . "@etu.univ-tours.fr";
 		$verification = $bdd->query('SELECT mail FROM utilisateurs');
 		$individus = $verification->fetchAll();
-		// Vérification de l'unicité du mail
+		// uniqueness of the email
 		if(in_array($email, array_column($individus, 'mail'))) {
-			$mail = 1;
+			$uni_mail = 1;
 		}
-		// Si le compte n'existe pas encore, création du compte
-		if($mail == 0) {
+		// if everything is alrigth create the account on the database
+		if($uni_mail == 0) {
 			$_SESSION['nom'] = htmlspecialchars($_POST['nom']);
 			$_SESSION['connected'] = true;
 			$nom = $_SESSION['nom'];
@@ -22,7 +28,6 @@
 			$creation->bindParam(':nom', $nom);
 			$creation->bindParam(':prenom', $prenom);
 			$creation->bindParam(':mdpass', $pass_hash);
-			//$creation->bindParam(':authentification', 0);
 			$pass_hash = password_hash(htmlspecialchars($_POST['mdp']), PASSWORD_DEFAULT);
 			try {
 				$creation->execute();
@@ -30,6 +35,34 @@
 			catch(Exception $e){
 				echo "Erreur :".$e->getMessage();
 			}
+
+			//send an email to check for authentification with phpMailer
+			//Version phpMailer qui fonctionne avec gmail mais pas Zimbra
+			$mail = new PHPMailer();
+			$mail->isSMTP();
+			$mail->SMTPDebug = 1;
+
+			$mail->Host = 'smtp.gmail.com';             //Adresse IP ou DNS du serveur SMTP
+			$mail->Port = 587;                          //Port TCP du serveur SMTP
+			$mail->SMTPAuth = true;                        //Utiliser l'identification
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Protocole de sécurisation des échanges avec le SMTP
+			$mail->Username   =  'site.stage.polytech@gmail.com';   //Adresse email à utiliser
+			$mail->Password   =  'Mdp@Adm!n!str@t3ur';         //Mot de passe de l'adresse email à utiliser
+
+			$mail->setFrom('site.stage.polytech@gmail.com', 'Site stages Polytech');
+			$mail->AddAddress($email);
+			$mail->Subject    =  'Verification de votre email';                      //Le sujet du mail
+			$mail->WordWrap   = 50; 			                   //Nombre de caracteres pour le retour a la ligne automatique
+			$mail->msgHTML(file_get_contents('mail_verif.html'), __DIR__); 		   //Le contenu au format HTML
+			$mail->AltBody = 'Votre inscription est presque finie. Veuillez répondre à ce mail en expliquant que vous n\'avez pas reçu de lien pour valider votre inscription.';
+			if (!$mail->send()) {
+			    echo $mail->ErrorInfo;
+			} else{
+			    echo 'Message bien envoyé';
+			}
+
+
+			$_SESSION['email'] = $email;
 		}
 	}
 	else {
@@ -40,7 +73,7 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8"/>
-	<link  href="avis.css" rel="stylesheet" type="text/css" media="all">
+	<link  href="formulaire.css" rel="stylesheet" type="text/css" media="all">
 	<title>Compte créé</title>
 </head>
 <body>
@@ -64,14 +97,14 @@
 		</div>
 	</header>
 	<body>
-		<div id="inscription">
-			<?php if($mail == 1) {
+		<div id="create_account">
+			<?php if($uni_mail == 1) {
 				//Si l'adresse mail a déjà été utilisée pour un compte
-				echo '<p>Cette adresse mail est déjà utilisée. Vous avez peut-être déjà un compte alors cliquez <a href="feuille_connexion.php">ici</a> pour vous connecter. Ou cliquez <a href="feuille_inscription.php">ici</a> pour réessayer avec une autre adresse.</p>';
+				echo '<p>Cette adresse mail est déjà utilisée. Vous avez peut-être déjà un compte alors cliquez <a href="page_connexion.php">ici</a> pour vous connecter. Ou cliquez <a href="page_create_account.php">ici</a> pour réessayer avec une autre adresse.</p>';
 			}
 			else {
 				//Si tout est bon :
-				echo '<p>Vous voilà inscrit. <\hr> Vous allez maintenant recevoir un mail pour confirmer cette inscription et vous pourrez ensuite entrer un avis sur un stage réalisé.</p>';
+				echo '<p>Vous voilà inscrit. </br> Vous allez maintenant recevoir un mail pour confirmer cette inscription et vous pourrez ensuite entrer un avis sur un stage réalisé.</p>';
 			} ?>
 			<p><a href="accueil.html">Retourner sur le site.</a></p>
 		</div>
