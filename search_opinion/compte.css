@@ -58,7 +58,7 @@ input:focus {
 body{
     display:grid;
     grid-template-columns:1fr 600px 1fr; /* 3 colonnes  */
-    grid-template-rows:101px 1fr 200px; /* 3 rangées */
+    grid-template-rows:100px 1fr 200px; /* 3 rangées */
     background-color: #fdfdfd;
 }
 
