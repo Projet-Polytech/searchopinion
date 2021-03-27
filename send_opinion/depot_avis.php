@@ -37,7 +37,6 @@
 			<label><div class="label">Numéro Siret de l'entreprise : </div><input class="formule" id="siret" type="text" name="siret" pattern="[0-9A-Z]{14}" placeholder="Numéro Siret" title="Le numéro Siret de l'entreprise" required autofocus></label>
 			<label><div class="label">Nom de l'entreprise : </div><div id="auto_nom"></div><input class="formule" id="nom" type="text" name="entreprise" placeholder="Nom de l'entreprise" title="Le nom de l'entreprise dans laquelle vous avez fait votre stage" ></label>
 			<label><div class="label">Sujet du stage : </div><input class="formule" type="text" name="sujet" placeholder="Sujet du stage" title="Sujet du stage" required></label>
-			<label><div class="label">Année du stage : </div><input class="formule" type="number" name="date" placeholder="YYYY" min="2000" max="2100" title="Date du stage" required></label>
 			<label><div class="label">Durée du stage : </div><input class="formule" type="number" name="duree" min="0" max="30" title="Durée du stage en semaine" required> semaines</label>
 
 			<p>Localisation de l'entreprise : </p>
@@ -63,12 +62,11 @@
 			<label><div class="label">Adresse : </div><input class="formule" type="text" name="adresse" placeholder="ex: 8 rue de l'Adresse" title="Entrez l'adresse de l'entreprise" required></label>
 			<label><div class="label">Salaire perçu (mensuel brut) : </div><input class="formule" type="number" name="salaire" placeholder="ex: 400" min="0" max="10000" title="Salaire perçu" required>€/mois</label>
 			<label><div class="label">Filière Polytech suivie : </div><select name="domaine" class="formule" title="Filière Polytech" required>
-				<option value="elec">Electronique et génie électrique</option>
-				<option value="amenagement">Génie de l'aménagement et de l'environnement</option>
-				<option value="info">Informatique</option>
-				<option value="infoIndus">Informatique industrielle</option>
-				<option value="mecaSys">Mécanique et conception des systèmes</option>
-				<option value="mecaMat">Mécanique et matériaux</option>
+				<?php $domaines = $bdd->query('SELECT nom_domaine FROM domaine');
+				while($dom = $domaines->fetch()) {
+					echo '<option value="' . $dom['nom_domaine'] . '">' . $dom['nom_domaine'] . '</option>';
+				}
+				$domaines->closeCursor(); ?>
 			</select></label>
 			<label><div class="label">Vous pouvez ici rédiger un avis personnel détaillé du stage : </div><textarea class="formule" name="avis" title="Rédigez un avis personnel sur le stage" required></textarea></label>
 			<table id="note">

@@ -47,9 +47,8 @@ if($verif['num_siret'] != 1) {
 }
 $verification->closeCursor();
 //entrer l'avis dans la table
-$creation = $bdd->prepare("INSERT INTO avis VALUES(NULL, :titre, :annee, :duree, :localisation, :adresse, :salaire, :domaine, :depot, :note_access, :note_accueil, :note_encadrement, :note_interet, :avis, :note_globale, :num_siret, :email)");
+$creation = $bdd->prepare("INSERT INTO avis VALUES(NULL, :titre, :duree, :localisation, :adresse, :salaire, :domaine, :depot, :note_access, :note_accueil, :note_encadrement, :note_interet, :avis, :note_globale, :num_siret, :email)");
 $creation->bindParam(':titre', $sujet);
-$creation->bindParam(':annee', $_POST['date']);
 $creation->bindParam(':duree', $_POST['duree']);
 $creation->bindParam(':localisation', $localisation);
 $creation->bindParam(':adresse', $adresse);
