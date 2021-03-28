@@ -7,37 +7,14 @@
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="../search_opinion/image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="">Contact<img src="../search_opinion/image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="../search_opinion/image/+_1.png"> Publier</a>
-		</div>
-		<div id="bandeau_contact">
-			<a href="">Contact</a>
-		</div>
-	</header>
-	<!-- Connexion base de donnée -->
-	<?php include("../search_opinion/connexion_bdd.php"); ?>
+	<?php include("../search_opinion/connexion_bdd.php");
+	include("../search_opinion/header.php"); ?>
 	<div id="depot_avis">
 		<form action="script_depot_avis.php" method="POST">
 			<h1>Dépôt d'un avis sur un stage réalisé</h1>
 			<label><div class="label">Numéro Siret de l'entreprise : </div><input class="formule" id="siret" type="text" name="siret" pattern="[0-9A-Z]{14}" placeholder="Numéro Siret" title="Le numéro Siret de l'entreprise" required autofocus></label>
 			<label><div class="label">Nom de l'entreprise : </div><div id="auto_nom"></div><input class="formule" id="nom" type="text" name="entreprise" placeholder="Nom de l'entreprise" title="Le nom de l'entreprise dans laquelle vous avez fait votre stage" ></label>
 			<label><div class="label">Sujet du stage : </div><input class="formule" type="text" name="sujet" placeholder="Sujet du stage" title="Sujet du stage" required></label>
-			<label><div class="label">Année du stage : </div><input class="formule" type="number" name="date" placeholder="YYYY" min="2000" max="2100" title="Date du stage" required></label>
 			<label><div class="label">Durée du stage : </div><input class="formule" type="number" name="duree" min="0" max="30" title="Durée du stage en semaine" required> semaines</label>
 
 			<p>Localisation de l'entreprise : </p>
@@ -62,13 +39,12 @@
 
 			<label><div class="label">Adresse : </div><input class="formule" type="text" name="adresse" placeholder="ex: 8 rue de l'Adresse" title="Entrez l'adresse de l'entreprise" required></label>
 			<label><div class="label">Salaire perçu (mensuel brut) : </div><input class="formule" type="number" name="salaire" placeholder="ex: 400" min="0" max="10000" title="Salaire perçu" required>€/mois</label>
-			<label><div class="label">Filière Polytech suivie : </div><select name="domaine" class="formule" title="Filière Polytech" required>
-				<option value="elec">Electronique et génie électrique</option>
-				<option value="amenagement">Génie de l'aménagement et de l'environnement</option>
-				<option value="info">Informatique</option>
-				<option value="infoIndus">Informatique industrielle</option>
-				<option value="mecaSys">Mécanique et conception des systèmes</option>
-				<option value="mecaMat">Mécanique et matériaux</option>
+			<label><div class="label">Domaine du stage : </div><select name="domaine" class="formule" title="Domaine du stage" required>
+				<?php $domaines = $bdd->query('SELECT nom_domaine FROM domaine');
+				while($dom = $domaines->fetch()) {
+					echo '<option value="' . $dom['nom_domaine'] . '">' . $dom['nom_domaine'] . '</option>';
+				}
+				$domaines->closeCursor(); ?>
 			</select></label>
 			<label><div class="label">Vous pouvez ici rédiger un avis personnel détaillé du stage : </div><textarea class="formule" name="avis" title="Rédigez un avis personnel sur le stage" required></textarea></label>
 			<table id="note">
@@ -85,9 +61,9 @@
 	$sirets->execute();
 	$nums_siret = $sirets->fetchAll();
 	$sirets->closeCursor(); ?>
-	<!-- Partie Javascript -->
+	<!-- Javascript part -->
 	<script type="text/javascript">
-		//Auto completion du numéro siret
+		//Auto completion of the siret number
 		const siret = document.getElementById('siret');
 		let nom;
 		siret.addEventListener('input', function(event) {
@@ -100,7 +76,7 @@
 				}
 			}
 		});
-		//envoie du nom de l'entreprise auto complété
+		//Send the name with the form
 		const submit = document.getElementById('inscrire');
 		submit.addEventListener('click', function() {
 			const name = document.getElementById('nom');

@@ -212,6 +212,14 @@ span[data-descr]:hover::after {
     margin-top: 15px;
     font-family: 'Alata';
     font-size: 20px;
+    text-align: center;
+}
+
+input:focus:invalid {
+  -webkit-box-shadow: 1px 1px 6px 1px #FF0000;
+}
+#create_account #nom, #prenom {
+  display: none;
 }
 /*---------------------------------------------------------- Page depot_avis ----------------------------------------------------------*/
 #depot_avis {
@@ -239,7 +247,7 @@ span[data-descr]:hover::after {
 #dep {
     display: none;
 }
-#retour_depot_avis, #verified_account {
+#retour_depot_avis, #verified_account, #account_created {
   display: grid;
   grid-area: 2/2/3/3;
   background-color: #f3f3f3;
