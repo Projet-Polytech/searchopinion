@@ -1,46 +1,43 @@
 <?php 
 
+/*-------------------------------------------------- sessions ----------------------------------------------------------*/
+
 include("connexion_bdd.php"); 
+include("fonctions.php");
+
+session_start();
 
 $id_stage = $_GET['id_stage'];
-
-/*-------------------------------------------------- fonctions ----------------------------------------------------------*/
-
-function convertisseur_note_etoile($note) {
-
-	$note_etoile = '';
-	$etoile_full = '<img src=\'image/etoile_full.png\'>';
-	$etoile_null = '<img src=\'image/etoile_null.png\'>';
-	$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
-
-	for ($nbr=0; $nbr < 5; $nbr++) { 
-
-		if ($note == 0) {
-			$note_etoile .= $etoile_null;
-		}
-
-		if (($note <= 4) and ($note > 0)) {
-			$note = 0;
-			$note_etoile .= $etoile_demi;
-		}
-
-		if ($note >= 8) {
-			$note -= 8;
-			$note_etoile .= $etoile_full;
-		}
-	}
-
-	return $note_etoile;
-}
 
 $etoile_full = '<img src=\'image/etoile_full.png\'>';
 $etoile_null = '<img src=\'image/etoile_null.png\'>';
 $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
-/*-------------------------------------------------- variables ----------------------------------------------------------*/
+/*-------------------------------------------------- variables filtres ( si vient de avis.php )----------------------------------------------------------*/
+
+$nbr_sem = '';
+$etoile_a = '';
+$salaire_a = '';
+
+if (isset($_GET['etoile'])) {
+	$etoile_a = '&etoile='.$_GET['etoile'];
+}
+
+for ($i=1; $i < 6; $i++) { 
+
+	if (isset($_GET['check'.$i])) {
+		$nbr_sem .= 'check'.$i.'='.$_GET['check'.$i].'&';	
+	}
+}
+
+if (isset($_GET['amountRange'])) {
+	$salaire_a = '&amountRange='.$_GET['amountRange'];
+}
+
+/*-------------------------------------------------- requete ----------------------------------------------------------*/
 
 $requete =
-'SELECT  a.domaine domaine, a.titre titre,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, a.date_depot date_depot,      a.note_accessibilite note_accessibilite, a.note_accueil note_accueil, a.note_encadrement note_encadrement, a.note_interet note_interet, a.fk_mail fk_mail, e.nom nom
+'SELECT  a.fk_domaine domaine, a.titre titre,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, a.date_depot date_depot, a.adresse adresse, a.note_accessibilite note_accessibilite, a.note_accueil note_accueil, a.note_encadrement note_encadrement, a.note_interet note_interet, a.fk_mail fk_mail, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
@@ -65,6 +62,8 @@ while ($donnees = $reponse1->fetch()) {
 	$date = $donnees['date_depot'];
 	$date = str_replace('-','/',$date);
 
+	$adresse = $donnees['adresse'];
+
 	$note_accessibilite = $donnees['note_accessibilite'];
 
 	$note_accueil = $donnees['note_accueil'];
@@ -75,8 +74,12 @@ while ($donnees = $reponse1->fetch()) {
 
 	$nom = $donnees['nom'];
 
+	$logo = $donnees['logo'];
+
 	$fk_mail = $donnees['fk_mail'];
 }
+
+$reponse1->closeCursor();
 
 ?>
 
@@ -90,35 +93,22 @@ while ($donnees = $reponse1->fetch()) {
 	
 <body>
 
- 	<header>
-
- 		<div id="header_logo">
-				<img src="image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="image/+_1.png"> Publier</a>
-		</div>
-		
-		
- 	</header>
+ 	<?php
+			include("header.php");
+	?>
  	<aside>
+ 	<?php 
 
- 	<a href=""><img src="image/retour2.png">Résultats précedents</a>
+ 	if (isset($_GET['page']) == NULL) {
+ 		echo '<a href=\'avis.php?'.$nbr_sem.$etoile_a.$salaire_a.'\'>
 
- 	<p>Italie<img src="image/index_2.png">Environement<img src="image/index_2.png">Nom du stage</p>
+ 		<img src=\'image/retour2.png\'>Résultats précedents</a>
 
- 	
+ 		<p>'.sup_num_location ($_SESSION['Localisation']).'<img src=\'image/index_2.png\'>'.$_SESSION['domaine'].'<img src=\'image/index_2.png\'>'.$nom.'</p>';
+
+ 	}
+
+ 	?>
 
  	</aside>
  	<div id="leftside">
@@ -128,15 +118,16 @@ while ($donnees = $reponse1->fetch()) {
  	<section>
 
  		<div id="detail_left">
- 			<img src="image/generale.png">
- 			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9508.996379979799!2d-0.5406837830637089!3d44.8818036295758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5528dfc3af92df%3A0xb86c663b296b5f78!2zU29jacOpdMOpIEfDqW7DqXJhbGUgZGVzIEJvaXM!5e0!3m2!1sfr!2sfr!4v1613683502141!5m2!1sfr!2sfr"  frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+ 			<?php echo '<img src=\'image/'.$logo.'\'>'.$adresse ?> 
  		</div>
  		<div id="detail_right">
  			<h1><?php echo $titre ?></h1>
+ 			<h2><?php echo $nom ?></h2>
  			<p><?php echo $date ?></p>
  			<div id="info_detail">
- 				<div><img src="image/logo_domaine_black.png"><?php echo $domaine ?></div>
- 				<div><img src="image/logo_billet_2.png"><?php echo $salaire.' €'; ?></div>			
+ 				<div><img src="image/logo_billet_2.png"><?php echo $salaire.' €'; ?></div>
+ 				<div><img src="image/logo_domaine_black.png"><?php echo $domaine ?></div>		
  				<div><img src="image/calendrier.png"><?php echo $duree.' semaines'; ?></div>
  				<div><img src="image/logo_localisation_black.png"><?php echo $fk_localisation ?></div>
  			</div>

@@ -1,47 +1,25 @@
 <?php
 
-/*-------------------------------------------------- fonctions ----------------------------------------------------------*/
+include("connexion_bdd.php");
+include("fonctions.php");
 
-function convertisseur_note_etoile($note) {
+/* -------------------------------------------------- variables session -------------------------------------------------- */
 
-	$note_etoile = '';
-	$etoile_full = '<img src=\'image/etoile_full.png\'>';
-	$etoile_null = '<img src=\'image/etoile_null.png\'>';
-	$etoile_demi = '<img src=\'image/etoile_demi.png\'>';
+session_start();
 
-	for ($nbr=0; $nbr < 5; $nbr++) { 
-
-		if ($note == 0) {
-			$note_etoile .= $etoile_null;
-		}
-
-		if (($note <= 4) and ($note > 0)) {
-			$note = 0;
-			$note_etoile .= $etoile_demi;
-		}
-
-		if ($note >= 8) {
-			$note -= 8;
-			$note_etoile .= $etoile_full;
-		}
+if (isset($_GET['Localisation'])) {
+	$_SESSION['Localisation'] = $_GET['Localisation'];
+	$lieu = $_SESSION['Localisation'];
+	if ($lieu == 'Toute localisation') {
+		$lieu = 'a.fk_localisation';
 	}
-
-	return $note_etoile;
 }
 
-
-function maj_filtre () {
-	$bdd = new PDO('mysql:host=localhost;port=3306;dbname=site_polytech;charset=utf8', 'root', '');
-	$reponse = $bdd->query('SELECT salaire FROM avis');
-	$note = array();
-    while ($donnees = $reponse->fetch()) {
-    	$note[] = $donnees['salaire'];
-    }
-    $minmax =array(min($note),max($note));
-    return ($minmax);
+if (isset($_GET['domaine'])) {
+	$_SESSION['domaine'] = $_GET['domaine'];
 }
 
-/* -------------------------------------------------- variables formulaire -------------------------------------------------- */
+/* -------------------------------------------------- on remet les valueur à 0 -------------------------------------------------- */
 
 $etoile_full = '<img src=\'image/etoile_full.png\'>';
 $etoile_null = '<img src=\'image/etoile_null.png\'>';
@@ -49,24 +27,53 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
 $etoilemin = 0;
 $salairemin = 0;
-
-if (isset($_POST['etoile'])) {
-	$etoilemin = $_POST['etoile'];
-}
-
 $totalcheck = array();
+$nbr_sem = '';
+
+$etoile_a = '';
+$salaire_a = '';
+
+$checked_input = array (
+    'etoile1' => '',
+    'etoile2' => '',
+    'etoile3' => '',
+    'etoile4' => '',
+    'etoile5' => '',
+    'check1' => '',
+    'check2' => '',
+    'check3' => '',
+    'check4' => '',
+    'check5' => '',
+    'amountRange' => maj_filtre($lieu,$_SESSION['domaine'])[0]);
+
+
+/* -------------------------------------------------- variables du filtre -------------------------------------------------- */
+
+if (isset($_GET['etoile'])) {
+	$etoilemin = $_GET['etoile'];
+	$checked_input['etoile'.$etoilemin] = 'checked';
+	$etoile_a = '&etoile='.$etoilemin;
+
+}
 
 for ($i=1; $i < 6; $i++) { 
 
-	if (isset($_POST['check'.$i])) {
-	$check = unserialize($_POST['check'.$i]);
-	$totalcheck = array_merge($totalcheck,$check);
+	if (isset($_GET['check'.$i])) {
+
+		$nbr_sem .= 'check'.$i.'='.$_GET['check'.$i].'&';
+		$check = unserialize($_GET['check'.$i]);
+		$totalcheck = array_merge($totalcheck,$check);
+		$checked_input['check'.$i] = 'checked';
 	}
 }
 
-if (isset($_POST['amountRange'])) {
-	$salairemin = $_POST['amountRange'];
+if (isset($_GET['amountRange'])) {
+	$salairemin = $_GET['amountRange'];
+	$checked_input['amountRange'] = $salairemin;
+	$salaire_a = '&amountRange='.$salairemin;
+
 }
+
 
 /*---------------------------------------------------------- html ----------------------------------------------------------*/
 
@@ -82,28 +89,9 @@ if (isset($_POST['amountRange'])) {
 	
 <body>
 
- 	<header>
-
- 		<div id="header_logo">
-				<img src="image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="image/+_1.png"> Publier</a>
-		</div>
-		
-		
- 	</header>
+ 	<?php
+			include("header.php");
+	?>	
 
  	<div id="page_test"><div class="page_test_test"></div></div>
  	<div id="bord_droit"><div class="page_test_test"></div></div>
@@ -112,44 +100,45 @@ if (isset($_POST['amountRange'])) {
 
  	<aside>
  		<p>
- 			Italie<img src="image/index_2.png">Environement<img src="image/index_2.png">Résultats de votre recherche
+ 			<?php echo sup_num_location($_SESSION['Localisation']); ?><img src="image/index_2.png"><?php echo $_SESSION['domaine']; ?><img src="image/index_2.png">Résultats de votre recherche
  		</p>
  	</aside>
 
  	<aside id="avis_filtre">
  		<h2>Filtres</h2>
- 		<form method="post" action="avis.php">
+ 		<form method="get" action="avis.php">
  			<h3>Salaire</h3>
  			<input type="range" name="amountRange" step="10" oninput="num.value = this.value"
- 			value = <?php echo '\''.maj_filtre()[0].'\'' ?>
- 			min = <?php echo '\''.maj_filtre()[0].'\'' ?>
- 			max = <?php echo '\''.maj_filtre()[1].'\'' ?>
+ 			value = <?php echo '\''.$checked_input['amountRange'].'\'' ?>
+ 			min = <?php echo '\''.maj_filtre($lieu,$_SESSION['domaine'])[0].'\'' ?>
+ 			max = <?php echo '\''.maj_filtre($lieu,$_SESSION['domaine'])[1].'\'' ?>
  			>
    		
-    		<div><p><output id="num"><?php echo maj_filtre()[0] ?></output>€</p><p><?php echo maj_filtre()[1] ?>€</p></div>
+    		<div><p><output id="num"><?php echo $checked_input['amountRange'] ?></output>€</p><p><?php echo maj_filtre($lieu,$_SESSION['domaine'])[1] ?>€</p></div>
 
     		<div class="demarcation"></div>
 
     		<h3>Durée (semaine)</h3>
 
-    		<input type="checkbox" name="check1" value="a:2:{i:0;i:0;i:1;i:4;}"><label > 4 et -</label><br>
-    		<input type="checkbox" name="check2" value="a:2:{i:0;i:4;i:1;i:8;}"><label > 4 à 8</label><br>
-    		<input type="checkbox" name="check3" value="a:2:{i:0;i:8;i:1;i:12;}"><label > 8 à 12</label><br>
-    		<input type="checkbox" name="check4" value="a:2:{i:0;i:12;i:1;i:16;}"><label > 12 à 16</label><br>
-    		<input type="checkbox" name="check5" value="a:2:{i:0;i:16;i:1;i:100;}"><label > 16 et +</label><br>
+    		<input type="checkbox" name="check1" value="a:2:{i:0;i:0;i:1;i:4;}" <?php echo $checked_input['check1']; ?>><label > 4 et -</label><br>
+    		<input type="checkbox" name="check2" value="a:2:{i:0;i:4;i:1;i:8;}" <?php echo $checked_input['check2']; ?>><label > 4 à 8</label><br>
+    		<input type="checkbox" name="check3" value="a:2:{i:0;i:8;i:1;i:12;}" <?php echo $checked_input['check3']; ?>><label > 8 à 12</label><br>
+    		<input type="checkbox" name="check4" value="a:2:{i:0;i:12;i:1;i:16;}" <?php echo $checked_input['check4']; ?>><label > 12 à 16</label><br>
+    		<input type="checkbox" name="check5" value="a:2:{i:0;i:16;i:1;i:100;}" <?php echo $checked_input['check5']; ?>><label > 16 et +</label><br>
 
     		<div class="demarcation"></div>
 
     		<h3>Nombre d'étoiles</h3>
-    		<input type="radio" name="etoile" value="1"><label > 1 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="2"><label > 2 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="3"><label > 3 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="4"><label > 4 étoile et +</label><br>
-    		<input type="radio" name="etoile" value="5"><label > 5 étoile</label><br>
+    		<input type="radio" name="etoile" value="1" <?php echo $checked_input['etoile1']; ?>><label > 1 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="2" <?php echo $checked_input['etoile2']; ?>><label > 2 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="3" <?php echo $checked_input['etoile3']; ?>><label > 3 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="4" <?php echo $checked_input['etoile4']; ?>><label > 4 étoile et +</label><br>
+    		<input type="radio" name="etoile" value="5" <?php echo $checked_input['etoile5']; ?>><label > 5 étoile</label><br>
 
     		<input type="submit" name="submit_filters" value="Appliquer">
     		
  		</form>
+ 		<a href="avis.php">Réinitialiser</a>
  	</aside>
 
  	<section>
@@ -178,30 +167,38 @@ catch (Exception $e) {
 
 /*-------------------------------------------------- requete -----------------------------------------------------*/
 
+if ($lieu != 'a.fk_localisation') {
+	$lieu = '\''.$_SESSION['Localisation'].'\'';
+}
+
 $requete =array(
 
-'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
+WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_interet DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
+WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_accessibilite DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
+WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_accueil DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, e.nom nom
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
+WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_encadrement DESC, note_globale DESC'
 
 );
@@ -236,6 +233,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 		$note_globale = $donnees['note_globale'];
 
 		$fk_localisation = $donnees['fk_localisation'];
+		$fk_localisation = sup_num_location($fk_localisation);
 
 		$salaire = $donnees['salaire'];
 
@@ -243,14 +241,19 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 		$avis = $donnees['avis'];
 
+		$adresse = $donnees['adresse'];
+
 		$titre = $donnees['nom'];
+
+		$logo = $donnees['logo'];
 
 /*-------------------------------------------------- application filtres -----------------------------------------------------*/
 
-		$nbrfor = 1;
-		for ($i=0; $i < count($totalcheck)-1; $i++) { 
-			if (($duree<$totalcheck[$i]) OR ($duree>$totalcheck[$i+1]))
-				$nbrfor += 1;
+		$nbrfor = 0;
+		for ($i=0; $i < count($totalcheck)-1; $i=$i+2) { 
+			if (($duree<$totalcheck[$i]) OR ($duree>$totalcheck[$i+1])) {
+				$nbrfor += 2;
+			}
 		}
 
 		if ($note_globale < $etoilemin*8) {
@@ -258,7 +261,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 			$nbrminrequete += 1;
 		}
 		
-		else if (count($totalcheck) == $nbrfor) {
+		else if ((count($totalcheck) == $nbrfor) AND (count($totalcheck) != 0)) {
 			echo "";
 			$nbrminrequete += 1;
 		}
@@ -268,19 +271,21 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 			$nbrminrequete += 1;
 		}
 
-/*-------------------------------------------------- stage requete -----------------------------------------------------*/
+/*-------------------------------------------------- stage requete ------------------------- avis_detail.php?id_stage='.$id_stage.'&page_source=1>'.$titre.'  ----------------------------*/
 		else {
 			echo 
 	   
 	    	'<div class=\'avis_stage \'>
-				<div class=\'avis_stage_logo\'><img src=\'image/logo_accueil.webp\'></div>
+				<div class=\'avis_stage_logo\'><img src=\'image/'.$logo.'\'></div>
 
 					<div class=\'avis_stage_gauche\'>
 
-						<a href=avis_detail.php?id_stage='.$id_stage.'>'.$titre.'</a>
+						<a href=avis_detail.php?'.$nbr_sem.'id_stage='.$id_stage.$etoile_a.$salaire_a.
+
+						'>'.$titre.'</a>
 				
-						<div class=\'avis_stage_info\'><img src=\'image/logo_domaine_black.png\'>'.$domaine.'</div>
-						<div class=\'avis_stage_info\'><img src=\'image/logo_localisation_black.png\'>'.$fk_localisation.'</div>
+						<div class=\'avis_stage_info\'><img src=\'image/logo_billet_2.png\'>'.$salaire.' €</div>
+						<div class=\'avis_stage_info\'><img src=\'image/calendrier.png\'>'.$duree.' semaines</div>
 
 					</div>
 
@@ -289,14 +294,11 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 				
 					<div class=\'avis_stage_etoile\'>'.convertisseur_note_etoile($note_globale).'</div>
 
-					<div class=\'avis_stage_info_2\'><img src=\'image/calendrier.png\'>'.$duree.' semaines</div>
-					<div class=\'avis_stage_info_2\'><img src=\'image/logo_billet_2.png\'>'.$salaire.' €</div>
+					<div class=\'avis_stage_info_2\'><img src=\'image/logo_domaine_black.png\'>'.$domaine.'</div>
+					<div class=\'avis_stage_info_2\'><img src=\'image/logo_localisation_black.png\'>'.$fk_localisation.'</div>
 
-				</div>
+				</div>'.$adresse.'
 
-				<iframe src=\'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9508.996379979799!2d-0.5406837830637089!3d44.8818036295758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5528dfc3af92df%3A0xb86c663b296b5f78!2zU29jacOpdMOpIEfDqW7DqXJhbGUgZGVzIEJvaXM!5e0!3m2!1sfr!2sfr!4v1613683502141!5m2!1sfr!2sfr\' width=\'400\' height=\'300\' frameborder=\'0\' style=\'border:0;\' allowfullscreen=\'\' aria-hidden=\'false\' tabindex=\'0\'></iframe>
-
-				
 				<p><img src=\'image/guillemet_inv.png\'>'.substr($avis, 0,340).'...<img src=\'image/guillemet.png\'></p>
 			</div>';
 		}

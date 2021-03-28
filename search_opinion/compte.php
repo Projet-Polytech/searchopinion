@@ -1,7 +1,11 @@
 <?php 
 
 include("connexion_bdd.php"); 
+include("fonctions.php");
 
+session_start();
+
+$_SESSION['adressemail'] = 'adresse@mail';
 
 $etoile_full = '<img src=\'image/etoile_full.png\'>';
 $etoile_null = '<img src=\'image/etoile_null.png\'>';
@@ -20,28 +24,9 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 	
 <body>
 
- 	<header>
-
- 		<div id="header_logo">
-				<img src="image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="image/+_1.png"> Publier</a>
-		</div>
-		
-		
- 	</header>
+ 	<?php
+			include("header.php");
+	?>
 
  	<section>
  		<div id="topcompte">
@@ -64,15 +49,54 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
  		</div>
  		<h2>Avis</h2>
  		<div id="block2">
- 			<a class="stagecompte" href="">
- 				<p>Nom de l'entreprise |<span>11/03/2021</span></p>
- 				<img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'>
- 			</a>
- 			<a class="stagecompte" href="">
- 				<p>Nom de l'entreprise |<span>11/03/2021</span></p>
- 				<img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'>
- 			</a>
- 			<a  class="stagecompte" href=""><p>Vous n'avez pas encore déposé d'avis</p></a>
+ 			<?php
+
+$requete =
+'SELECT  a.date_depot date_depot, a.note_globale note_globale, a.id_stage id_stage, e.nom nom
+FROM avis a
+INNER JOIN entreprises e
+ON a.fk_num_siret = e.num_siret
+WHERE a.fk_mail = \''.$_SESSION['adressemail'].'\'';
+
+$reponse1 = $bdd->query($requete);
+$nbr_result = $reponse1->rowCount();
+
+if ($nbr_result != 0) {
+
+	while ($donnees = $reponse1->fetch()) {
+
+	$date = $donnees['date_depot'];
+	$date = str_replace('-','/',$date);
+
+	$note_globale = $donnees['note_globale'];
+
+	$id_stage = $donnees['id_stage'];
+
+	$nom = $donnees['nom'];
+
+	echo '
+	<a class=\'stagecompte\' href=\'avis_detail.php?id_stage='.$id_stage.'&page=compte\'>
+ 		<p>'.$nom.' |<span>'.$date.'</span></p>
+ 		'.convertisseur_note_etoile($note_globale).'
+ 	</a>';
+	}
+}
+
+else {
+	echo '<a  class=\'stagecompte\' href=\'\'><p>Vous n\'avez pas encore déposé d\'avis</p></a>';
+}
+
+$reponse1->closeCursor();
+
+/*
+<a class="stagecompte" href="">
+ 	<p>Nom de l'entreprise |<span>11/03/2021</span></p>
+ 	<img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'><img src='image/etoile_full.png'>
+ </a>
+*/
+ 			?>
+
+
  			
  		</div>
  		

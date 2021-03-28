@@ -60,13 +60,13 @@ body{
 /*---------------------------------------------------------- header ----------------------------------------------------------*/
 
 header{
+    height: 100px;
+    width: 100%;
     grid-column: span 4;
     background-color:#1a1d21;
     display:grid;
-
-    grid-template-columns:120px 130px 1fr 160px 160px 160px;
-    grid-template-rows:101px 1000px 200px;
-
+    grid-template-columns:120px 1fr 150px 150px 180px 170px 1fr 160px;
+    grid-template-rows:1fr ;
     border-bottom: 1px solid #1a1d21;
 }
 
@@ -97,26 +97,53 @@ header div a:hover img {
 }
 
 
-header #header_logo {
+header #header_contact {
+    grid-area: 1/3/2/4;
+}
+
+header #header_accueil {
+    grid-area: 1/4/2/5;
 }
 
 header #header_Connexion {
-    grid-area: 1/5/1/6;
+    grid-area: 1/6/1/7;
 }
 
 header #header_Compte {
-    grid-area: 1/4/1/5;
+    grid-area: 1/5/1/6;
 }
 
-header #header_logo img{
+header #header_logo a{
     display: block;
     height: 70px;
-    border-radius: 3px;
+    border-radius: 4px;
     margin: 0px 15px 0px 15px;
+    background: url('image/logo_polytech_6.png');
+    width: 76px;
+    background-repeat: no-repeat;
+    background-size: 76px;
+    background-position: center;
+    padding: 0px;
+}
+
+header #header_logo a img {
+    display: block;
+    height: 70px;
+    width: 76px;
+    border-radius: 3px;
+    transition: opacity 400ms linear;
+    margin: 0px;
+    padding: 0px;
+}
+
+header #header_logo a:hover img{
+    opacity: 0;
+    transform: none;
+    cursor: pointer;
 }
 
 header #header_Publier {
-    grid-area: 1/6/1/7;
+    grid-area: 1/8/2/9;
 }
 
 header #header_Publier a{
@@ -205,11 +232,11 @@ aside:nth-of-type(1) p img {
 #avis_filtre{
     border:solid 1px  #cdcdcd;
     grid-area: 2/1/3/2;
-    margin-top: 10px;
+    margin: 10px 0px 40px 0px;
     border-radius: 4px;
     display: flex;
     flex-flow: column nowrap;
-    height: 630px;
+    height: 664px;
 }
 
 #avis_filtre h2 {
@@ -384,6 +411,29 @@ input[type=range]:focus::-ms-fill-upper {
     transform:background-color;
     cursor: pointer;
 }
+
+#avis_filtre a {
+    background-color:#656565;
+    border: none;
+    color: white;
+    height:36px;
+    width: 70%;
+    margin:10px 0px 0px 15%;
+    border-radius:2px;
+    font-family: 'Alata';
+    font-size:14px;
+    transition:background-color 400ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#avis_filtre a:hover {
+    background-color: black;
+    transform:background-color;
+    cursor: pointer;
+}
+
 
 /* ---------------------------------- tri ---------------------------------- */
 
