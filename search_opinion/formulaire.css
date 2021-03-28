@@ -96,10 +96,6 @@ header div a:hover img {
     transform: rotate(90deg);
 }
 
-
-header #header_logo {
-}
-
 header #header_Connexion {
     grid-area: 1/5/1/6;
 }
@@ -108,11 +104,19 @@ header #header_Compte {
     grid-area: 1/4/1/5;
 }
 
-header #header_logo img{
-    display: block;
-    height: 70px;
-    border-radius: 3px;
-    margin: 0px 15px 0px 15px;
+header #header_logo a img {
+  display: block;
+  height: 70px;
+  width: 76px;
+  border-radius: 3px;
+  transition: opacity 400ms linear;
+  margin: 0px 15px 0px 15px;
+  padding: 0px;
+}
+
+header #header_logo a:hover img{
+  transform: none;
+  cursor: pointer;
 }
 
 header #header_Publier {
