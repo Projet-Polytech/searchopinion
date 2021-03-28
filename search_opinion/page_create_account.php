@@ -1,10 +1,4 @@
-<?php session_start();
-if(isset($_SESSION['email'])) {
-	$registered = 1;
-}
-else {
-	$registered = 0;
-} ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,30 +7,7 @@ else {
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="image/Logo_Polytech_5.png">
-		</div>
-
-		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="page_connexion.php">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<?php if($registered == 1) {
-				echo '<a href="../send_opinion/depot_avis.php"><img src="image/+_1.png"> Publier</a>';
-			}
-			else {
-				echo '<a href="page_create_account.php"><img src="image/+_1.png"> Publier</a>';
-			} ?>
-		</div>
-	</header>
+	<?php include("header.php") ?>
 	<div id="create_account">
 		<form action="script_create_account.php" method="POST" >
 			<div><label><div class="label">Adresse mail (étudiante): <span class="interrogation" data-descr="Nous vous conseillons de rediriger votre adresse mail étudiante vers une boîte mail personnelle pour simplifier les échanges. Vous pouvez faire cela sur CELENE via l'onglet &quot;Redirection boîte mail&quot;.">?</span></div><input class="formule" id="mail" type="text" name="mail" pattern="^[a-z0-9-]{2,}\.[a-z0-9-]{2,}$" minlength="3" maxlength="32" placeholder=" ex : prenom.nom" title="Votre adresse mail" required autofocus>@etu.univ-tours.fr</label></div>

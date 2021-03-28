@@ -7,28 +7,7 @@
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="../search_opinion/image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="">Contact<img src="../search_opinion/image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="../search_opinion/image/+_1.png"> Publier</a>
-		</div>
-		<div id="bandeau_contact">
-			<a href="">Contact</a>
-		</div>
-	</header>
+	<?php include("../search_opinion/header.php") ?>
 	<!-- Connexion base de donnée -->
 	<?php include("../search_opinion/connexion_bdd.php"); ?>
 	<div id="depot_avis">

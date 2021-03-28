@@ -81,25 +81,7 @@ require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 	<title>Compte créé</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="image/Logo_Polytech_5.png">
-		</div>
-
-		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="image/+_1.png"> Publier</a>
-		</div>
-	</header>
+	<?php include("header.php") ?>
 	<body>
 		<div id="account_created">
 			<?php if($uni_mail == 1) {
@@ -107,9 +89,9 @@ require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 				echo '<p>Cette adresse mail est déjà utilisée. Vous avez peut-être déjà un compte alors cliquez <a href="page_connexion.php">ici</a> pour vous connecter. Ou cliquez <a href="page_create_account.php">ici</a> pour réessayer avec une autre adresse.</p>';
 			}
 			else {
-				//Si tout est bon et que l'envoie de mail fonctionne :
+				//Si tout est bon et que la réception du mail fonctionne :
 				//echo '<p>Vous voilà inscrit. </br> Vous allez maintenant recevoir un mail pour confirmer cette inscription et vous pourrez ensuite entrer un avis sur un stage réalisé.</p>';
-				//Si tout est bon mais que l'envoie de mail ne fonctionne pas :
+				//Si tout est bon mais que la réception du mail ne fonctionne pas :
 				echo '<p>Vous voilà inscrit. </br> Pour valider votre inscription cliquez <a href="verified_account.php">ici</a> et vous pourrez ensuite entrer un avis ou consulter des avis que vous avez déjà rédigé.</p>';
 			} ?>
 			<p><a href="accueil.php">Retourner sur le site.</a></p>

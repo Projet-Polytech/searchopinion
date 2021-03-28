@@ -29,7 +29,7 @@
 ?>
 <script type="text/javascript">
 	if(<?php echo json_encode($redirection); ?>) {
-		window.location.replace("../send_opinion/depot_avis.php"); //plutôt mettre la page de gestion de compte
+		window.location.replace("compte.php"); //plutôt mettre la page de gestion de compte
 	}
 </script>
 <!DOCTYPE html>
@@ -40,25 +40,7 @@
 	<title>Connexion</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="image/Logo_Polytech_5.png">
-		</div>
-
-		<div id="header_contact"><a href="">Contact<img src="image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="">Inscription<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="">Connexion<img src="image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href=""><img src="image/+_1.png"> Publier</a>
-		</div>
-	</header>
+	<?php include("header.php") ?>
 	<div id="connexion">
 		<h1>Connexion</h1>
 		<div id="message">
