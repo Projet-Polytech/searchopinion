@@ -16,7 +16,7 @@ else {
 	</div>
 
 	<div id="header_accueil">
-		<a href="accueil.php">Accueil<img src="image/index.png"></a>
+		<a href="../search_opinion/accueil.php">Accueil<img src="../search_opinion/image/index.png"></a>
 	</div>
 
 	<div id="header_Publier">
