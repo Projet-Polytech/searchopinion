@@ -7,9 +7,8 @@
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
-	<?php include("../search_opinion/header.php") ?>
-	<!-- Connexion base de donnée -->
-	<?php include("../search_opinion/connexion_bdd.php"); ?>
+	<?php include("../search_opinion/connexion_bdd.php");
+	include("../search_opinion/header.php"); ?>
 	<div id="depot_avis">
 		<form action="script_depot_avis.php" method="POST">
 			<h1>Dépôt d'un avis sur un stage réalisé</h1>
@@ -40,7 +39,7 @@
 
 			<label><div class="label">Adresse : </div><input class="formule" type="text" name="adresse" placeholder="ex: 8 rue de l'Adresse" title="Entrez l'adresse de l'entreprise" required></label>
 			<label><div class="label">Salaire perçu (mensuel brut) : </div><input class="formule" type="number" name="salaire" placeholder="ex: 400" min="0" max="10000" title="Salaire perçu" required>€/mois</label>
-			<label><div class="label">Filière Polytech suivie : </div><select name="domaine" class="formule" title="Filière Polytech" required>
+			<label><div class="label">Domaine du stage : </div><select name="domaine" class="formule" title="Domaine du stage" required>
 				<?php $domaines = $bdd->query('SELECT nom_domaine FROM domaine');
 				while($dom = $domaines->fetch()) {
 					echo '<option value="' . $dom['nom_domaine'] . '">' . $dom['nom_domaine'] . '</option>';
@@ -62,9 +61,9 @@
 	$sirets->execute();
 	$nums_siret = $sirets->fetchAll();
 	$sirets->closeCursor(); ?>
-	<!-- Partie Javascript -->
+	<!-- Javascript part -->
 	<script type="text/javascript">
-		//Auto completion du numéro siret
+		//Auto completion of the siret number
 		const siret = document.getElementById('siret');
 		let nom;
 		siret.addEventListener('input', function(event) {
@@ -77,7 +76,7 @@
 				}
 			}
 		});
-		//envoie du nom de l'entreprise auto complété
+		//Send the name with the form
 		const submit = document.getElementById('inscrire');
 		submit.addEventListener('click', function() {
 			const name = document.getElementById('nom');

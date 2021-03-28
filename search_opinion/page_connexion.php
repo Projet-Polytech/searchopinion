@@ -10,7 +10,7 @@
 		$req->bindParam('mail', $email);
 		$req->execute();
 		$resultat = $req->fetch();
-		// Comparaison du pass envoyé via le formulaire avec la base
+		// Compare the password from the database and the one given
 		$isPasswordCorrect = password_verify($_POST['mdp'], $resultat['mdp']);
 		if(!$resultat) {
 			$pb_mail = 1;
@@ -29,7 +29,7 @@
 ?>
 <script type="text/javascript">
 	if(<?php echo json_encode($redirection); ?>) {
-		window.location.replace("compte.php"); //plutôt mettre la page de gestion de compte
+		window.location.replace("compte.php"); 
 	}
 </script>
 <!DOCTYPE html>

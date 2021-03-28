@@ -3,29 +3,37 @@ include("../search_opinion/connexion_bdd.php");
 //initializing variables
 $pb_entreprise = 0;
 $pb_creation = 0;
-$siret = htmlspecialchars($_POST['siret']);
-if($_POST['pays'] == "France") {
-	$localisation = htmlspecialchars($_POST['departement']);
+$siret = $_POST['siret'];
+$email = $_SESSION['email'];
+if($_POST['pays'][0] === '\'' | $_POST['pays'][0] === '"'){
+	$localistation = '';
+}
+else if($_POST['pays'] == "France") {
+	if($_POST['departement'][0] === '\'' | $_POST['departement'][0] === '"'){
+		$localisation = '';
+	}
+	else {
+		$localisation = $_POST['departement'];
+	}
 }
 else {
-	$localisation = htmlspecialchars($_POST['pays']);
+	$localisation = $_POST['pays'];
 }
 $depot = date("Y-m-d");
 $note_accessibilite = $_POST['note_accessibilite']*2;
 $note_accueil = $_POST['note_accueil']*2;
 $note_encadrement = $_POST['note_encadrement']*2;
 $note_interet = $_POST['note_interet']*2;
-$note_globale = intval(array_sum([$note_accessibilite,$note_accueil,$note_encadrement,$note_interet])/2);//diviser par deux pour l'affichage en demi étoile
-//Modification du champs avis pour un bon enregistrement dans la bdd (et pour éviter les failles XSS)
+$note_globale = intval(array_sum([$note_accessibilite,$note_accueil,$note_encadrement,$note_interet])/2);
+//Adjustment of the variables to avoid complication in the database
 $avis = addslashes($_POST['avis']);
 $avis = str_replace('<', "&lt;", $avis);
 $avis = str_replace('>', "&gt;", $avis);
 $nom = addslashes($_POST['entreprise']);
 $sujet = addslashes($_POST['sujet']);
 $adresse = addslashes($_POST['adresse']);
-$email = $_SESSION['email'];
 
-//créer une instance pour l'entreprise si celle-ci n'existe pas
+//Create a new instance when the company isn't in the database
 $verification = $bdd->prepare('SELECT COUNT(*) AS num_siret FROM entreprises WHERE num_siret = :siret');
 $verification->bindParam(':siret', $siret);
 $verification->execute();
@@ -46,7 +54,7 @@ if($verif['num_siret'] != 1) {
 	}
 }
 $verification->closeCursor();
-//entrer l'avis dans la table
+//Insert the opinion in the database
 $creation = $bdd->prepare("INSERT INTO avis VALUES(NULL, :titre, :duree, :localisation, :adresse, :salaire, :domaine, :depot, :note_access, :note_accueil, :note_encadrement, :note_interet, :avis, :note_globale, :num_siret, :email)");
 $creation->bindParam(':titre', $sujet);
 $creation->bindParam(':duree', $_POST['duree']);
@@ -80,25 +88,7 @@ catch(Exception $e){
 	<title>Dépôt d'un avis</title>
 </head>
 <body>
-	<header>
-		<div id="header_logo">
-			<img src="../search_opinion/image/Logo_Polytech_5.png">
-		</div>
-
- 		<div id="header_contact"><a href="../search_opinion/accueil.php">Contact<img src="../search_opinion/image/index.png"></a></div>
-		
-		<div id="header_Compte">
-			<a href="../search_opinion/accueil.php">Inscription<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Connexion">
-			<a href="../search_opinion/page_connexion.php">Connexion<img src="../search_opinion/image/index.png"></a>
-		</div>
-
-		<div id="header_Publier">
-			<a href="depot_avis.php"><img src="../search_opinion/image/+_1.png"> Publier</a>
-		</div>
-	</header>
+	<?php include("../search_opinion/header.php") ?>
 	<div id="retour_depot_avis">
 		<?php if($pb_entreprise == 1 | $pb_creation == 1) {
 			echo "<p>Il y a eu un problème lors de la création de l'instance de votre entreprise merci de nous contacter par mail pour analyser ce problème. Ou cilquez <a href='depot_avis.php'>ici</a> pour réessayer.</p>";

@@ -16,7 +16,6 @@ require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 		$verification->bindParam(':mail', $email);
 		$verification->execute();
 		$individus = $verification->fetch();
-		//echo $individus . "individus";
 		// uniqueness of the email
 		if($individus['mail'] != 0) {
 			$uni_mail = 1;
@@ -42,23 +41,23 @@ require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 			}
 
 			//send an email to check for authentification with phpMailer
-			//Version phpMailer qui fonctionne avec gmail mais pas Zimbra
+			//phpMailer version that work with @gmail.com but not @etu.univ-tours
 			$mail = new PHPMailer();
 			$mail->isSMTP();
 			//$mail->SMTPDebug = 1;
 
-			$mail->Host = 'smtp.gmail.com';             //Adresse IP ou DNS du serveur SMTP
-			$mail->Port = 587;                          //Port TCP du serveur SMTP
-			$mail->SMTPAuth = true;                        //Utiliser l'identification
-			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Protocole de sécurisation des échanges avec le SMTP
-			$mail->Username   =  'site.stage.polytech@gmail.com';   //Adresse email à utiliser
-			$mail->Password   =  'Mdp@Adm!n!str@t3ur';         //Mot de passe de l'adresse email à utiliser
+			$mail->Host = 'smtp.gmail.com';
+			$mail->Port = 587;
+			$mail->SMTPAuth = true;
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+			$mail->Username   =  'site.stage.polytech@gmail.com';
+			$mail->Password   =  'Mdp@Adm!n!str@t3ur';
 
 			$mail->setFrom('site.stage.polytech@gmail.com', 'Site stages Polytech');
 			$mail->AddAddress($email);
-			$mail->Subject    =  'Verification de votre email';                      //Le sujet du mail
-			$mail->WordWrap   = 50; 			                   //Nombre de caracteres pour le retour a la ligne automatique
-			$mail->msgHTML(file_get_contents('mail_verif.html'), __DIR__); 		   //Le contenu au format HTML
+			$mail->Subject    =  'Verification de votre email';
+			$mail->WordWrap   = 50;
+			$mail->msgHTML(file_get_contents('mail_verif.html'), __DIR__);
 			$mail->AltBody = 'Votre inscription est presque finie. Veuillez répondre à ce mail en expliquant que vous n\'avez pas reçu de lien pour valider votre inscription.';
 			if (!$mail->send()) {
 			    $etat_mail = $mail->ErrorInfo;
@@ -85,13 +84,13 @@ require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
 	<body>
 		<div id="account_created">
 			<?php if($uni_mail == 1) {
-				//Si l'adresse mail a déjà été utilisée pour un compte
+				//If the email adress has already been used for an account
 				echo '<p>Cette adresse mail est déjà utilisée. Vous avez peut-être déjà un compte alors cliquez <a href="page_connexion.php">ici</a> pour vous connecter. Ou cliquez <a href="page_create_account.php">ici</a> pour réessayer avec une autre adresse.</p>';
 			}
 			else {
-				//Si tout est bon et que la réception du mail fonctionne :
+				//If everything is alright and the email part too
 				//echo '<p>Vous voilà inscrit. </br> Vous allez maintenant recevoir un mail pour confirmer cette inscription et vous pourrez ensuite entrer un avis sur un stage réalisé.</p>';
-				//Si tout est bon mais que la réception du mail ne fonctionne pas :
+				//If everything is alright except the email part
 				echo '<p>Vous voilà inscrit. </br> Pour valider votre inscription cliquez <a href="verified_account.php">ici</a> et vous pourrez ensuite entrer un avis ou consulter des avis que vous avez déjà rédigé.</p>';
 			} ?>
 			<p><a href="accueil.php">Retourner sur le site.</a></p>
