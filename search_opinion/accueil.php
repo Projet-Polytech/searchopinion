@@ -57,21 +57,21 @@ $_SESSION['page'] = 1;
 
 				<div class="recherche">
 					<h3>Domaine<img src="image/logo_domaine.png"></h3>
-					<input type="text" name="domaine" placeholder="ex : informatique" list="domaine">
-						<datalist id="domaine">
-							<?php 
+					<select name="domaine">
+						
+					<?php 
 
-							$requete_filiere = $bdd->query('SELECT DISTINCT fk_domaine FROM avis');
+					$requete_filiere = $bdd->query('SELECT DISTINCT fk_domaine FROM avis');
 
-							while($filiere = $requete_filiere->fetch()) {
-								echo '<option value="'.$filiere['fk_domaine'].'">';
-							}
+					while($filiere = $requete_filiere->fetch()) {
+						echo '<option value="'.$filiere['fk_domaine'].'">'.$filiere['fk_domaine'].'</option>';
+					}
 
-							$requete_filiere->closeCursor(); 
+					$requete_filiere->closeCursor(); 
 
-							?>
+					?>
 
-						</datalist>
+					</select>
 				</div>
 					
 				<div id="recherche_button">
@@ -175,7 +175,6 @@ for ($i = 0; $i <= 4; $i++) {
 		
 	</footer>
 
-	
 </body>
 </html>
 

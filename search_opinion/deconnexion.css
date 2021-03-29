@@ -43,6 +43,12 @@ a {
     src: url('font/RobotoSlab-Light.ttf');
 }
 
+@font-face{
+    font-family: 'Notolight';
+    src: url('font/NotoSansJP-Regular.otf');
+}
+
+
 input:focus {
     outline:  none;
 }
@@ -52,8 +58,8 @@ input:focus {
 
 body{
     display:grid;
-    grid-template-columns:1fr 1000px 1fr; /* 4 colonnes de largeur = */
-    grid-template-rows:101px 2000px 200px; /* 3 rangées */
+    grid-template-columns:1fr 1000px 1fr; 
+    grid-template-rows: 101px  800px 200px;
     background-color: white;
 }
 
@@ -95,7 +101,6 @@ header div a:hover img {
     background-color:;
     transform: rotate(90deg);
 }
-
 
 header #header_contact {
     grid-area: 1/3/2/4;
@@ -172,141 +177,41 @@ header #header_Publier a:hover img{
     transform:none;
 }
 
+/*---------------------------------------------------------- section ----------------------------------------------------------*/
 
-/*---------------------------------------------------------- Page create account ----------------------------------------------------------*/
-
-#create_account {
-    display: grid;
+section {
     grid-area: 2/2/3/3;
-    background-color: #f3f3f3;
-    font-family: 'Lato';
-    font-size: 20px;
-}
-#create_account form {
-    grid-area: 1/2/3/3;
-    margin-top: 15px;
+    width: 100%;
+    height: 80px;
+    background-color: ;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23); 
+    box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23);
     display: flex;
-    flex-direction: column;
-}
-.label {
-    font-family: 'Alata';
-    margin: 1%;
-}
-.formule {
-    outline: none;
-    width: 50%;
-    height: 35px;
-    box-sizing: border-box;
-    border: 2px inset #e0e0e0;
-    font-family: 'Lato';
-    font-size: 16px;
-}
-.interrogation {
-	background-color: #c1c1c1;
-	color: white;
-	border-radius: 5px;
-	border: black;
-	padding: 2px;
-	font-size: 13px;
-}
-span[data-descr] {
-  position: relative;
-  text-decoration: none;
-  cursor: help;
+    margin: 40px 0px 0px 0px;
+    font-family:'NotoLight';
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 12px;
 }
 
-span[data-descr]:hover::after {
-  content: attr(data-descr);
-  position: absolute;
-  left: 0;
-  top: 24px;
-  min-width: 300px;
-  border: 2px black outset;
-  border-radius: 10px;
-  background-color: white;
-  padding: 8px;
-  color: #000000;
-  font-size: 15px;
-  z-index: 1;
-  font-family: 'Lato';
-}
-#inscrire{
-    background-color: #1a1d21;
-    color: white;
-    border-style: none;
-    border-radius: 8px;
-    width: 50%;
-    height: 38px;
-    margin-top: 15px;
-    font-family: 'Alata';
-    font-size: 20px;
-    text-align: center;
+section img {
+    height: 26px;
+    display: flex;
+    background-color: ;
+    margin: 0px 20px 0px 20px;
 }
 
-input:focus:invalid {
-  -webkit-box-shadow: 1px 1px 6px 1px #FF0000;
-}
-#create_account #nom, #prenom {
-  display: none;
-}
-/*---------------------------------------------------------- Page depot_avis ----------------------------------------------------------*/
-#depot_avis {
-    display: grid;
-    grid-area: 2/2/3/3;
-    background-color: #f3f3f3;
-    font-family: 'Lato';
-}
-#depot_avis form {
-    grid-area: 1/2/3/3;
-    margin-top: 15px;
+section h1 {
     display: flex;
-    flex-direction: column;
-    font-size: 18px;
+    font-weight: normal;
+    background-color: ;
 }
-#depot_avis h1 {
-    margin-bottom: 15px;
-}
-#depot_avis .note {
-    outline: none;
-    height: 35px;
-    box-sizing: border-box;
-    border: 2px inset #e0e0e0;
-}
-#dep {
-    display: none;
-}
-#retour_depot_avis, #verified_account, #account_created {
-  display: grid;
-  grid-area: 2/2/3/3;
-  background-color: #f3f3f3;
-  font-family: 'Alata';
-  font-size: 20px;
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 4%;
-  color: #1a1d21;
-}
-/*---------------------------------------------------------- Page connexion ----------------------------------------------------------*/
-#connexion {
-  display: grid;
-  grid-area: 2/2/3/3; /* row-start/column-start/row-end/column-end */
-  grid-template-rows: 50px 25px 1fr;
-  grid-template-columns: 1fr 3fr;
-  background-color: #f3f3f3;
-  font-family: 'Lato';
-}
-#connexion form {
-  grid-area: 3/2/3/2;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-}
-#connexion h1 {
-  grid-area: 1/2/1/2;
-  margin-top: 10px;
-}
-#message {
-  grid-area: 2/1/2/3;
-  margin: 5px;
+
+/*---------------------------------------------------------- footer ----------------------------------------------------------*/
+
+footer {
+    background-color:  #004976;
+    grid-column: span 4;
 }

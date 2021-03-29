@@ -9,10 +9,12 @@ session_start();
 
 if (isset($_GET['Localisation'])) {
 	$_SESSION['Localisation'] = $_GET['Localisation'];
-	$lieu = $_SESSION['Localisation'];
-	if ($lieu == 'Toute localisation') {
-		$lieu = 'a.fk_localisation';
-	}
+}
+
+$lieu = $_SESSION['Localisation'];
+
+if ($lieu == 'Toute localisation') {
+	$lieu = 'a.fk_localisation';
 }
 
 if (isset($_GET['domaine'])) {

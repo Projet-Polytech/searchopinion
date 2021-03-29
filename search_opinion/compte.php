@@ -1,11 +1,17 @@
 <?php 
 
-include("connexion_bdd.php"); 
-include("fonctions.php");
-
 session_start();
 
 $_SESSION['adressemail'] = 'adresse@mail';
+
+if (isset($_SESSION['adressemail'])) {}
+else {header('Location:deconnexion.php');}
+
+include("connexion_bdd.php"); 
+include("fonctions.php");
+
+
+
 
 $etoile_full = '<img src=\'image/etoile_full.png\'>';
 $etoile_null = '<img src=\'image/etoile_null.png\'>';
@@ -31,7 +37,7 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
  	<section>
  		<div id="topcompte">
  			<h1><img src="image/account.png">Mon Compte</h1>
- 			<a href=""><img src="image/deco2.png"></a>
+ 			<a href="deconnexion.php"><img src="image/deco2.png"></a>
  			<p>adressemail@gmail.com</p>
  		</div>
 
