@@ -49,7 +49,7 @@ while ($donnees = $reponse1->fetch()) {
 
 	$domaine = $donnees['domaine'];
 
-	$titre = $donnees['titre'];
+	$titre = stripslashes($donnees['titre']);
 
 	$fk_localisation = $donnees['fk_localisation'];
 
@@ -57,12 +57,12 @@ while ($donnees = $reponse1->fetch()) {
 
 	$duree = $donnees['duree'];
 
-	$avis = $donnees['avis'];
+	$avis = stripslashes($donnees['avis']);
 
 	$date = $donnees['date_depot'];
 	$date = str_replace('-','/',$date);
 
-	$adresse = $donnees['adresse'];
+	$adresse = stripslashes($donnees['adresse']);
 
 	$note_accessibilite = $donnees['note_accessibilite'];
 
@@ -72,7 +72,7 @@ while ($donnees = $reponse1->fetch()) {
 
 	$note_interet = $donnees['note_interet'];
 
-	$nom = $donnees['nom'];
+	$nom = stripslashes($donnees['nom']);
 
 	$logo = $donnees['logo'];
 
