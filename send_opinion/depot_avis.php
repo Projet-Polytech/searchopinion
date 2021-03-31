@@ -17,7 +17,7 @@
 			<label><div class="label">Sujet du stage : </div><input class="formule" type="text" name="sujet" placeholder="Sujet du stage" title="Sujet du stage" required></label>
 			<label><div class="label">Durée du stage : </div><input class="formule" type="number" name="duree" min="0" max="30" title="Durée du stage en semaine" required> semaines</label>
 
-			<p>Localisation de l'entreprise : </p>
+			<p></br>Localisation de l'entreprise : </p>
 			<label><div class="label">Pays : </div><input class="formule" type="text" id="pays" name="pays" placeholder="ex: France" title="Entrez le pays de votre stage" list="liste_pays" required></label>
 			<datalist id="liste_pays">
 				<option value="France">
