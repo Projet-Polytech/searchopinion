@@ -20,7 +20,7 @@ else {
 	$localisation = $_POST['pays'];
 }
 $depot = date("Y-m-d");
-$note_accessibilite = $_POST['note_accessibilite']*2;
+$note_localisation = $_POST['note_localisation']*2;
 $note_accueil = $_POST['note_accueil']*2;
 $note_encadrement = $_POST['note_encadrement']*2;
 $note_interet = $_POST['note_interet']*2;
@@ -55,7 +55,7 @@ if($verif['num_siret'] != 1) {
 }
 $verification->closeCursor();
 //Insert the opinion in the database
-$creation = $bdd->prepare("INSERT INTO avis VALUES(NULL, :titre, :duree, :localisation, :adresse, :salaire, :domaine, :depot, :note_access, :note_accueil, :note_encadrement, :note_interet, :avis, :note_globale, :num_siret, :email)");
+$creation = $bdd->prepare("INSERT INTO avis VALUES(NULL, :titre, :duree, :localisation, :adresse, :salaire, :domaine, :depot, :note_localisation, :note_accueil, :note_encadrement, :note_interet, :avis, :note_globale, :num_siret, :email)");
 $creation->bindParam(':titre', $sujet);
 $creation->bindParam(':duree', $_POST['duree']);
 $creation->bindParam(':localisation', $localisation);
@@ -63,7 +63,7 @@ $creation->bindParam(':adresse', $adresse);
 $creation->bindParam(':salaire', $_POST['salaire']);
 $creation->bindParam(':domaine', $_POST['domaine']);
 $creation->bindParam(':depot', $depot);
-$creation->bindParam(':note_access', $note_accessibilite);
+$creation->bindParam(':note_localisation', $note_localisation);
 $creation->bindParam(':note_accueil', $note_accueil);
 $creation->bindParam(':note_encadrement', $note_encadrement);
 $creation->bindParam(':note_interet', $note_interet);
