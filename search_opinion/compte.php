@@ -2,9 +2,7 @@
 
 session_start();
 
-$_SESSION['adressemail'] = 'adresse@mail';
-
-if (isset($_SESSION['adressemail'])) {}
+if (isset($_SESSION['email'])) {}
 else {header('Location:deconnexion.php');}
 
 include("connexion_bdd.php"); 
@@ -17,7 +15,22 @@ $etoile_full = '<img src=\'image/etoile_full.png\'>';
 $etoile_null = '<img src=\'image/etoile_null.png\'>';
 $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 
+//Modification of the password 
 
+if(isset($_POST['pass1']) AND isset($_POST['pass2'])) {
+	$modification = $bdd->prepare('UPDATE utilisateurs SET mdp = :mdp WHERE mail = :mail');
+	$modification->bindParam(':mdp', $pass_hash);
+	$modification->bindParam('mail', $_SESSION['email']);
+	$pass_hash = password_hash($_POST['pass1'], PASSWORD_DEFAULT);
+	try {
+		$modification->execute();
+		$message = 1;
+	}
+	catch(Exception $e) {
+		echo "Erreur :".$e->getMessage();
+		$message = 0;
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,21 +51,29 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
  		<div id="topcompte">
  			<h1><img src="image/account.png">Mon Compte</h1>
  			<a href="deconnexion.php"><img src="image/deco2.png"></a>
- 			<p>adressemail@gmail.com</p>
+ 			<p><?php echo $_SESSION['email'] ?></p>
  		</div>
 
  		<h2>Changer de mot de passe</h2>
  		<div id="block" class="col-3 input-effect">
 
- 			<form method="post" action="avis.php">
- 				<input type="password" name="pass1" class="compte_password">
+ 			<form method="post" action="compte.php">
+ 				<input type="password" name="pass1" class="compte_password" title="Entrez votre mot de passe" pattern="^[a-zA-Z0-9\?\!\@\+\*\$\&\_\:\.\-\#]{4,25}$" id="pwd">
  				<label class="label1">mot de passe</label>
- 				<input type="password" name="" class="compte_password_2">
+ 				<input type="password" name="pass2" class="compte_password_2" id="pwd_verif" title="Entrez votre mot de passe" pattern="^[a-zA-Z0-9\?\!\@\+\*\$\&\_\:\.\-\#]{4,25}$">
  				<label class="label2">mot de passe</label>
-				<input id='inpmdp' type="submit" value="">
+				<input id='inpmdp' type="submit" value="" readonly>
 			</form>
 
  		</div>
+ 		<?php if(isset($message)) {
+			if($message == 1) {
+				echo '<p>Votre mot de passe a bien été modifié.</p>';
+			}
+			elseif ($message == 0) {
+			 	echo '<p>Il y a eu un problème lors de votre changement de mot de passe merci de réessayer.</p>';
+			 }
+		} ?>
  		<h2>Mes avis</h2>
  		<div id="block2">
  			<?php
@@ -62,7 +83,7 @@ $requete =
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
-WHERE a.fk_mail = \''.$_SESSION['adressemail'].'\'';
+WHERE a.fk_mail = \''.$_SESSION['email'].'\'';
 
 $reponse1 = $bdd->query($requete);
 $nbr_result = $reponse1->rowCount();
@@ -133,6 +154,18 @@ $(window).load(function(){
 
 // ]]>
 
+//Control of the second password :
+	const pwd_2 = document.getElementById('pwd_verif');
+	pwd_2.addEventListener('input', function(){
+		if(pwd_2.value !== document.getElementById('pwd').value) {
+			pwd_2.style.border = 'solid 1px #FF0000';
+			document.getElementById('inpmdp').setAttribute('type', 'text');
+		}
+		else {
+			pwd_2.style.border = 'solid 1px #c9c7c7';
+			document.getElementById('inpmdp').setAttribute('type', 'submit');
+		}
+	});
 </script>
 
 </body>

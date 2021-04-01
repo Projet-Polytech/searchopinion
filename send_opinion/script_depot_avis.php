@@ -45,13 +45,12 @@ if($verif['num_siret'] != 1) {
 	$entreprise->bindParam(':logo', $pb_entreprise);
 	try {
 		$entreprise->execute();
-		$entreprise->closeCursor();
 	}
 	catch(Exception $e){
 		echo "Erreur :".$e->getMessage();
 		$pb_entreprise = 1;
-		$entreprise->closeCursor();
 	}
+	$entreprise->closeCursor();
 }
 $verification->closeCursor();
 //Insert the opinion in the database
@@ -97,5 +96,6 @@ catch(Exception $e){
 			echo "<p>Merci pour votre avis. Nous vous invitons à entrer un autre avis <a href='depot_avis.php'>ici</a> ou à retourner sur la <a href='../search_opinion/accueil.php'>page principale</a> pour entamer des recherches sur votre prochain stage en vous aiguillant grâce aux nombreux avis déposés par d'autres étudiants.</p>";
 		} ?>
 	</div>
+	<?php include('../search_opinion/footer.php'); ?>
 </body>
 </html>

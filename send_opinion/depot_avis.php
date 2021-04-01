@@ -57,6 +57,7 @@
 			<div><p><input type="submit" name="envoyer" value="Envoyer" id="inscrire" /></p></div>
 		</form>
 	</div>
+	<?php include('../search_opinion/footer.php'); ?>
 	<?php $sirets = $bdd->query('SELECT num_siret, nom FROM entreprises');
 	$sirets->execute();
 	$nums_siret = $sirets->fetchAll();

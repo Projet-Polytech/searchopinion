@@ -20,5 +20,6 @@ catch(Exception $e){
 	<div id="verified_account">
 		<p>La création de votre compte a bien été finalisée. Vous pouvez maintenant rédiger un avis <a href="../send_opinion/depot_avis.php">ici</a> ou bien retourner consulter des avis pour votre recherche de stage <a href="accueil.php">ici</a>.</p>
 	</div>
+	<?php include('footer.php'); ?>
 </body>
 </html>
