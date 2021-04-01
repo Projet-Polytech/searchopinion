@@ -147,6 +147,7 @@ if (isset($_GET['amountRange'])) {
  		
 
  		<div id="tri_stage">
+ 			<p>Trier par</p>
  			<input type="button" name="btnsujet" value="intérêt sujet" class="selectbtntri">
  			<input type="button" name="btnaccessibilite" value="accessibilité" class="nonselectbtntri">
  			<input type="button" name="btnambiance" value="ambiance" class="nonselectbtntri">
@@ -286,7 +287,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 						'>'.$titre.'</a>
 				
-						<div class=\'avis_stage_info\'><img src=\'image/logo_billet_2.png\'>'.$salaire.' €</div>
+						<div class=\'avis_stage_info\'><img src=\'image/piece.png\'>'.$salaire.' €</div>
 						<div class=\'avis_stage_info\'><img src=\'image/calendrier.png\'>'.$duree.' semaines</div>
 
 					</div>
@@ -301,7 +302,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 
 				</div>'.$adresse.'
 
-				<p><img src=\'image/guillemet_inv.png\'>'.substr($avis, 0,340).'...<img src=\'image/guillemet.png\'></p>
+				<p><img src=\'image/guillemet_inv.png\'>'.htmlentities(substr($avis, 0,340)).'...<img src=\'image/guillemet.png\'></p>
 			</div>';
 		}
 
@@ -318,76 +319,14 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 }
 
 ?>
-
-<?php
-
-/*  -------------------------------------------------- code html stage save -----------------------------------------------------
-
-	<div id="avis_stage_tri_2" class="nonselectpage">
-		<div class="avis_stage ">
-				<div class="avis_stage_logo"><img src="image/logo_accueil.webp"></div>
-
-					<div class="avis_stage_gauche">
-
-						<h1>Tesla</h1>
-				
-						<div class="avis_stage_info"><img src="image/logo_domaine_black.png">Informatique</div>
-						<div class="avis_stage_info"><img src="image/logo_localisation_black.png">Lyon</div>
-
-					</div>
-
-				<div class="avis_stage_droit">
-
-				
-					<div class="avis_stage_etoile"><img src="image/etoile_1.png"><img src="image/etoile_1.png"><img src="image/etoile_1.png"><img src="image/etoile_2.png"><img src="image/etoile_2.png"></div>
-
-					<div class="avis_stage_info_2"><img src="image/calendrier.png">12 semaines</div>
-					<div class="avis_stage_info_2"><img src="image/logo_billet_2.png">1800 €</div>
-
-				</div>
-
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9508.996379979799!2d-0.5406837830637089!3d44.8818036295758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5528dfc3af92df%3A0xb86c663b296b5f78!2zU29jacOpdMOpIEfDqW7DqXJhbGUgZGVzIEJvaXM!5e0!3m2!1sfr!2sfr!4v1613683502141!5m2!1sfr!2sfr" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-
-				
-				<p><img src="image/guillemet_inv.png">Encore un extrait du début de l'avis sur un autre stage pour test. Dans l'idéale on met là aussi 4-5 lignes pour donner envie de lire la suite. Cette fois extrait plus long donc au moins 10 lignes pour que ça remplisse Vous êtes à la recherche d’une offre de stage ? StudentJob vous propose de nombreuses annonces de stage dans la vente ...<img src="image/guillemet.png"></p>
-		</div>
-
-		<div class="avis_stage avis_stage_ordre_2">
-				<div class="avis_stage_logo"><img src="image/logo_accueil.webp"></div>
-
-					<div class="avis_stage_gauche">
-
-						<h1>Sociétée générale</h1>
-				
-						<div class="avis_stage_info"><img src="image/logo_domaine_black.png">Informatique</div>
-						<div class="avis_stage_info"><img src="image/logo_localisation_black.png">Lyon</div>
-
-					</div>
-
-				<div class="avis_stage_droit">
-
-				
-					<div class="avis_stage_etoile"><img src="image/etoile_1.png"><img src="image/etoile_1.png"><img src="image/etoile_1.png"><img src="image/etoile_2.png"><img src="image/etoile_2.png"></div>
-
-					<div class="avis_stage_info_2"><img src="image/calendrier.png">12 semaines</div>
-					<div class="avis_stage_info_2"><img src="image/logo_billet_2.png">1800 €</div>
-
-				</div>
-
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9508.996379979799!2d-0.5406837830637089!3d44.8818036295758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5528dfc3af92df%3A0xb86c663b296b5f78!2zU29jacOpdMOpIEfDqW7DqXJhbGUgZGVzIEJvaXM!5e0!3m2!1sfr!2sfr!4v1613683502141!5m2!1sfr!2sfr" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-
-				
-				<p><img src="image/guillemet_inv.png">Encore un extrait du début de l'avis sur un autre stage pour test. Dans l'idéale on met là aussi 4-5 lignes pour donner envie de lire la suite. Cette fois extrait plus long donc au moins 10 lignes pour que ça remplisse Vous êtes à la recherche d’une offre de stage ? StudentJob vous propose de nombreuses annonces de stage dans la vente ...<img src="image/guillemet.png"></p>
-		</div>
-	</div>
-*/
-?>
 		
  	</section>
 
  	</div>
 
- 	<footer></footer>
+ 	<?php
+			include("footer.php");
+	?>
 
 <script type="text/javascript">
   // <![CDATA[

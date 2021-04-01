@@ -53,7 +53,7 @@ $etoile_demi = '<img src=\'image/etoile_demi.png\'>';
 			</form>
 
  		</div>
- 		<h2>Avis</h2>
+ 		<h2>Mes avis</h2>
  		<div id="block2">
  			<?php
 
@@ -107,8 +107,11 @@ $reponse1->closeCursor();
  		</div>
  		
  	</section>
+ 	<?php
+			include("footer.php");
+	?>
 
- 	<footer></footer>
+ 	
  
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

@@ -126,7 +126,7 @@ $reponse1->closeCursor();
  			<h2><?php echo $nom ?></h2>
  			<p><?php echo $date ?></p>
  			<div id="info_detail">
- 				<div><img src="image/logo_billet_2.png"><?php echo $salaire.' €'; ?></div>
+ 				<div><img src="image/piece.png"><?php echo $salaire.' €'; ?></div>
  				<div><img src="image/logo_domaine_black.png"><?php echo $domaine ?></div>		
  				<div><img src="image/calendrier.png"><?php echo $duree.' semaines'; ?></div>
  				<div><img src="image/logo_localisation_black.png"><?php echo $fk_localisation ?></div>
@@ -134,31 +134,33 @@ $reponse1->closeCursor();
 
  			<div id="etoile_detail">
  				<div id="details_interet">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_interet*4); ?></div>interet
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_interet*4); ?></div>Interêt
  				</div>
  				<div id="details_ambiance">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accueil*4); ?></div>ambiance
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accueil*4); ?></div>Ambiance
  				</div>
  				<div id="details_accessibilite">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accessibilite*4); ?></div>accessiblité
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accessibilite*4); ?></div>Localisation
  				</div>
  				<div id="details_encadrement">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_encadrement*4); ?></div>encadrement
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_encadrement*4); ?></div>Encadrement
  				</div>
  				
  			</div>
  			<p>
  				<img src="image/guillemet_inv.png">
 
- 				<?php echo $avis ?> 
+ 				<?php echo htmlentities($avis) ?> 
 
  				<img src="image/guillemet.png">
  			</p>
- 			<a href=<?php echo 'mailto:'.$fk_mail; ?>><img src="image/enveloppe.png">Plus d'info</a>
+ 			<a href=<?php echo 'mailto:'.$fk_mail; ?>><img src="image/enveloppe.png">Contacter pour plus d'info</a>
  		</div>
  		
  	</section>
- 	<footer></footer>
+ 	<?php
+			include("footer.php");
+	?>
  
 
 </body>

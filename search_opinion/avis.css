@@ -439,24 +439,28 @@ input[type=range]:focus::-ms-fill-upper {
 
 section #tri_stage {
     height: 36px;
-    background-color: white;
+    background-color: ;
     grid-area: 2/2/3/3;
-    width: 90%;
+    width: 96%;
     display: flex;
     justify-content:;
     align-items: stretch;
-    border-radius: 4px;
-    margin: 10px 0px 10px 5%;
-    border: 1px solid #004976;
+    
+    margin: 10px 0px 10px 2%;
+    
+    font-size: 16px;
+    font-family: 'Alata';
 }
 
 section #tri_stage input {
     border: none;
-    width: 25%;
+    width: 21%;
+    color: #004976;
     font-size: 16px;
     font-family: 'Alata';
-    color: #004976;
-    border-right: 1px solid #004976;
+    border-left: 1px solid #004976;
+    border-top: 1px solid #004976;
+    border-bottom: 1px solid #004976;
     background-color: rgba(0,0,0,0);
 }
 
@@ -464,8 +468,23 @@ section #tri_stage input:hover {
     cursor: pointer;
 }
 
-section #tri_stage input:nth-child(4) {
+section #tri_stage p {
+    font-size: 20px;
     border:none;
+    background-color: ;
+    width: 16%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section #tri_stage input:nth-child(5) {
+    border-right: 1px solid #004976;
+    border-radius: 0px 4px 4px 0px;
+}
+
+section #tri_stage input:nth-child(2) {
+    border-radius: 4px 0px 0px 4px;
 }
 
 section #tri_stage .selectbtntri {
@@ -659,13 +678,58 @@ section #no_result_stage {
 
 /*---------------------------------------------------------- footer ----------------------------------------------------------*/
 
-section time {
-    background-color: blue;
-}
-
 footer {
     background-color:  #004976;
     grid-column: span 4;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 100%;
+}
+
+footer h2 {
+    width:100%;
+    font-weight: normal;
+    font:24px 'Alata' ;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ;
+}
+
+footer p {
+    font: 14px 'Alata' ;
+    height: 20%;
+   
+}
+
+footer #imgfooter {
+    width: 100%;
+    height: 30%;
+    background-color: ;
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+}
+
+footer #imgfooter a {
+    background-color: ;
+    width: 50px;
+    height:100%;
+}
+
+footer #imgfooter a img{
+    height: 50%;
+    margin-top: 25%;
+}
+
+footer #bottom_footer {
+    height: 20%;
+    width:100%;
+    background-color: black;
 }
 /*---------------------------------------------------------- Page create account ----------------------------------------------------------*/
 

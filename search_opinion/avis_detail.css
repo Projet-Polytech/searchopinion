@@ -235,13 +235,16 @@ aside p img {
 section {
     grid-area: 3/2/4/3;
     background-color: white;
-    
+    -webkit-box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23); 
+    box-shadow: 0px 1px 4px 1px rgba(0,0,0,0.23);
     width: 100%;
     background-color: ;
     display: grid;
     grid-template-columns: 200px 1fr; 
     grid-template-rows: 1fr;
     margin: 60px 0px 60px 0px;
+    border-radius: 4px;
+    padding: 50px;
 }
 
 section #detail_left {
@@ -393,7 +396,7 @@ section #detail_right p:nth-of-type(2) img:nth-of-type(2){
 section #detail_right a {
     font-family:'Alata';
     font-size: 16px;
-    width: 140px;
+    width: 250px;
     background-color: white;
     height: 40px;
     display: flex;
@@ -419,4 +422,53 @@ section #detail_right a img {
 footer {
     background-color:  #004976;
     grid-column: span 4;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 100%;
+}
+
+footer h2 {
+    width:100%;
+    font-weight: normal;
+    font:24px 'Alata' ;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ;
+}
+
+footer p {
+    font: 14px 'Alata' ;
+    height: 20%;
+   
+}
+
+footer #imgfooter {
+    width: 100%;
+    height: 30%;
+    background-color: ;
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+}
+
+footer #imgfooter a {
+    background-color: ;
+    width: 50px;
+    height:100%;
+}
+
+footer #imgfooter a img{
+    height: 50%;
+    margin-top: 25%;
+}
+
+footer #bottom_footer {
+    height: 20%;
+    width:100%;
+    background-color: black;
 }

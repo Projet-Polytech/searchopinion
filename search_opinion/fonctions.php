@@ -45,6 +45,8 @@ function maj_filtre ($localisation,$domaine) {
     	$note[] = $donnees['salaire'];
     }
     $minmax =array(min($note),max($note));
+
+    $reponse->closeCursor(); 
     return ($minmax);
 }
 
@@ -75,6 +77,8 @@ function db_localisation () {
     }
 
     $pattern .= 'Toute localisation';
+
+    $reponse->closeCursor(); 
     
     return ($pattern);
 }

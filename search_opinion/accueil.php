@@ -27,7 +27,7 @@ $_SESSION['page'] = 1;
 
 		<div id="fond_accueil">
 
-			<h1>Stage & avis</h1>
+			<h1>Stages & avis</h1>
 
 			<h2>Rechercher les stages selon des critères<br>Et selon d'autres critères</h2>
 			
@@ -35,6 +35,7 @@ $_SESSION['page'] = 1;
 
 				<div class="recherche">
 					<h3>Localisation<img src="image/logo_localisation_2.png"></h3>
+					<p>Parmi les avis existants</p>
 
 					<input list="Localisation" type="text" placeholder="ex : Paris" name="Localisation" required pattern=<?php echo '\''.db_localisation().'\''?>>
 						<datalist id="Localisation">
@@ -49,7 +50,6 @@ $_SESSION['page'] = 1;
 
 							$requete_localisation->closeCursor(); 
 
-
 							?>
 
 						</datalist>
@@ -57,14 +57,15 @@ $_SESSION['page'] = 1;
 
 				<div class="recherche">
 					<h3>Domaine<img src="image/logo_domaine.png"></h3>
-					<select name="domaine">
+					
+					<select name="domaine" >
 						
 					<?php 
 
 					$requete_filiere = $bdd->query('SELECT DISTINCT fk_domaine FROM avis');
 
 					while($filiere = $requete_filiere->fetch()) {
-						echo '<option value="'.$filiere['fk_domaine'].'">'.$filiere['fk_domaine'].'</option>';
+						echo '<option  value="'.$filiere['fk_domaine'].'">'.$filiere['fk_domaine'].'</option>';
 					}
 
 					$requete_filiere->closeCursor(); 
@@ -72,6 +73,7 @@ $_SESSION['page'] = 1;
 					?>
 
 					</select>
+				
 				</div>
 					
 				<div id="recherche_button">
@@ -106,10 +108,12 @@ $_SESSION['page'] = 1;
 
 $requete =
 
-'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation, a.avis avis, a.date_depot date_depot, e.nom nom, e.logo logo
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation, a.avis avis, a.date_depot date_depot, e.nom nom, e.logo logo, d.abr_domaine abr_domaine
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
+INNER JOIN domaine d
+ON a.fk_domaine = d.nom_domaine
 ORDER BY note_globale DESC, note_interet DESC';
 
 $reponse1 = $bdd->query($requete);
@@ -120,7 +124,7 @@ for ($i = 0; $i <= 4; $i++) {
 
 	$id_stage = $donnees['id_stage']; 
 
-	$domaine = $donnees['domaine'];
+	$abr_domaine = $donnees['abr_domaine'];
 
 	$note_globale = $donnees['note_globale'];
 
@@ -147,13 +151,15 @@ for ($i = 0; $i <= 4; $i++) {
 		<div class=\'accueil_stage_etoile\'>'.convertisseur_note_etoile($note_globale).'
 
 		</div>
-		<div class=\'accueil_stage_info\'><img src=\'image/logo_domaine_black.png\'>'.$domaine.'</div>
+		<div class=\'accueil_stage_info\'><img src=\'image/logo_domaine_black.png\'>'.$abr_domaine.'</div>
 		<div class="accueil_stage_info"><img src="image/logo_localisation_black.png">'.$fk_localisation.'</div>
 		<h1>'.$nom.'</h1>
-		<p><img src="image/guillemet_inv.png">'.substr($avis, 0,150).' ...<img src="image/guillemet.png"></p>
+		<p><img src="image/guillemet_inv.png">'.htmlentities(substr($avis, 0,150)).' ...<img src="image/guillemet.png"></p>
 		<time>'.$date.'</time>
 	</a>';
-}		
+}	
+
+$reponse1->closeCursor(); 	
 
 			?>
 			
@@ -161,9 +167,8 @@ for ($i = 0; $i <= 4; $i++) {
 			
 		<div id="stage_visite">
 			<div class="accueil_stage" id="stage_info">
-				<h2>Plus d'infos avec des liens qui renvoie à des pages</h2>
-				<a href="">Des infos</a>
-				<a href="">D'autres infos</a>
+				<h2>Vos dernières recherches grâce aux cookies <br>( Bientôt disponible )</h2>
+				<img src="image/arrow.png">
 			</div>
 			<a href="" class="accueil_stage"></a>
 			<a href="" class="accueil_stage"></a>
@@ -171,9 +176,9 @@ for ($i = 0; $i <= 4; $i++) {
 			<a href="" class="accueil_stage"></a>
 		</div>
 	</section>
-	<footer id="footer">
-		
-	</footer>
+	<?php
+			include("footer.php");
+	?>
 
 </body>
 </html>
