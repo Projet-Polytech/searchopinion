@@ -17,7 +17,6 @@
 		}
 		else {
 			if($isPasswordCorrect) {
-				$_SESSION['connected'] = true;
 				$_SESSION['email'] = $email;
 				$redirection = true;
 			}

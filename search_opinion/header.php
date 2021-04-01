@@ -29,7 +29,12 @@ else {
 	</div>
 
 	<div id="header_Connexion">
-		<a href="../search_opinion/page_connexion.php">Connexion<img src="../search_opinion/image/index.png"></a>
+		<?php if($registered == 1) {
+			echo '<a href="../search_opinion/deconnexion.php">Déconnexion<img src="../search_opinion/image/index.png"></a>';
+		}
+		else {
+			echo '<a href="../search_opinion/page_connexion.php">Connexion<img src="../search_opinion/image/index.png"></a>';
+		} ?>
 	</div>
 
 	<div id="header_Compte">
