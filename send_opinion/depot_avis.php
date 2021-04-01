@@ -49,7 +49,7 @@
 			<label><div class="label">Vous pouvez ici rédiger un avis personnel détaillé du stage : </div><textarea class="formule" name="avis" title="Rédigez un avis personnel sur le stage" required></textarea></label>
 			<table id="note">
 				<tr><td class="label">Note d'accueil : </td><td><input class="note" type="number" name="note_accueil" min="0" max="5" step="0.5" placeholder=" /5" pattern="[0-5](\.5)?" title="Note de l'accueil reçu" required></td></tr>
-				<tr><td class="label">Note de l'accessibilité au site : </td><td><input class="note" type="number" name="note_accessibilite" min="0" max="5" step="0.5" placeholder=" /5" pattern="[0-5](\.5)?" title="Note de l'accessibilité au site" required></td></tr>
+				<tr><td class="label">Note de la localistaion : </td><td><input class="note" type="number" name="note_localisation" min="0" max="5" step="0.5" placeholder=" /5" pattern="[0-5](\.5)?" title="Note de la localisation" required></td></tr>
 				<tr><td class="label">Note de l'intérêt scientifique : </td><td><input class="note" type="number" name="note_interet" min="0" max="5" step="0.5" placeholder=" /5" pattern="[0-5](\.5)?" title="Note de l'intérêt scientifique du stage" required></td></tr>
 				<tr><td class="label">Note de l'encadrement du stage : </td><td><input class="note" type="number" name="note_encadrement" min="0" max="5" step="0.5" placeholder=" /5" pattern="[0-5](\.5)?" title="Note de l'encadrement du stage" required></td></tr>
 			</table>
