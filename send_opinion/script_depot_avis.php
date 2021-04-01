@@ -24,7 +24,7 @@ $note_accessibilite = $_POST['note_accessibilite']*2;
 $note_accueil = $_POST['note_accueil']*2;
 $note_encadrement = $_POST['note_encadrement']*2;
 $note_interet = $_POST['note_interet']*2;
-$note_globale = intval(array_sum([$note_accessibilite,$note_accueil,$note_encadrement,$note_interet])/2);
+$note_globale = intval(array_sum([$note_accessibilite,$note_accueil,$note_encadrement,$note_interet]));
 //Adjustment of the variables to avoid complication in the database
 $avis = addslashes($_POST['avis']);
 $avis = str_replace('<', "&lt;", $avis);
