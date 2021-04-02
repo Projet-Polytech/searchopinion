@@ -2,9 +2,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\\wamp64\\PHPMailer-master\\src\\Exception.php';
-require 'C:\\wamp64\\PHPMailer-master\\src\\PHPMailer.php';
-require 'C:\\wamp64\\PHPMailer-master\\src\\SMTP.php';
+require 'PHPMailer-master\\src\\Exception.php';
+require 'PHPMailer-master\\src\\PHPMailer.php';
+require 'PHPMailer-master\\src\\SMTP.php';
 	include("connexion_bdd.php");
 	//initializing variables
 	$uni_mail = 0;
