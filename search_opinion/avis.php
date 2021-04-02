@@ -149,8 +149,8 @@ if (isset($_GET['amountRange'])) {
  		<div id="tri_stage">
  			<p>Trier par</p>
  			<input type="button" name="btnsujet" value="intérêt sujet" class="selectbtntri">
- 			<input type="button" name="btnaccessibilite" value="accessibilité" class="nonselectbtntri">
- 			<input type="button" name="btnambiance" value="ambiance" class="nonselectbtntri">
+ 			<input type="button" name="btnaccessibilite" value="localisation" class="nonselectbtntri">
+ 			<input type="button" name="btnambiance" value="accueil" class="nonselectbtntri">
  			<input type="button" name="btnencadrement" value="encadrement" class="nonselectbtntri">
 
  		</div>
@@ -176,28 +176,32 @@ if ($lieu != 'a.fk_localisation') {
 
 $requete =array(
 
-'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, 
+a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_interet DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, 
+a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
-ORDER BY note_accessibilite DESC, note_globale DESC',
+ORDER BY note_localisation DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, 
+a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
 WHERE a.fk_localisation = '.$lieu.' AND a.fk_domaine = \''.$_SESSION['domaine'].'\'
 ORDER BY note_accueil DESC, note_globale DESC',
 
-'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
+'SELECT  a.id_stage id_stage, a.fk_domaine domaine,  a.note_globale note_globale,  a.fk_localisation fk_localisation,  a.salaire salaire, 
+a.duree duree, a.avis avis,a.adresse adresse, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
@@ -274,7 +278,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 			$nbrminrequete += 1;
 		}
 
-/*-------------------------------------------------- stage requete ------------------------- avis_detail.php?id_stage='.$id_stage.'&page_source=1>'.$titre.'  ----------------------------*/
+/*-------------------------------------------------- stage requete -----------------------------------------------------*/
 		else {
 			echo 
 	   
@@ -329,6 +333,7 @@ for ($nombre_de_tri = 0; $nombre_de_tri <= 3; $nombre_de_tri++) {
 	?>
 
 <script type="text/javascript">
+
   // <![CDATA[
 
 var btnsujet = document.querySelector("input[name='btnsujet']");

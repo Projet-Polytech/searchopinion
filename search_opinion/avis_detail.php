@@ -37,7 +37,7 @@ if (isset($_GET['amountRange'])) {
 /*-------------------------------------------------- requete ----------------------------------------------------------*/
 
 $requete =
-'SELECT  a.fk_domaine domaine, a.titre titre,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, a.date_depot date_depot, a.adresse adresse, a.note_accessibilite note_accessibilite, a.note_accueil note_accueil, a.note_encadrement note_encadrement, a.note_interet note_interet, a.fk_mail fk_mail, e.nom nom, e.logo logo
+'SELECT  a.fk_domaine domaine, a.titre titre,  a.fk_localisation fk_localisation,  a.salaire salaire, a.duree duree, a.avis avis, a.date_depot date_depot, a.adresse adresse, a.note_localisation note_localisation, a.note_accueil note_accueil, a.note_encadrement note_encadrement, a.note_interet note_interet, a.fk_mail fk_mail, e.nom nom, e.logo logo
 FROM avis a
 INNER JOIN entreprises e
 ON a.fk_num_siret = e.num_siret
@@ -64,7 +64,7 @@ while ($donnees = $reponse1->fetch()) {
 
 	$adresse = stripslashes($donnees['adresse']);
 
-	$note_accessibilite = $donnees['note_accessibilite'];
+	$note_localisation = $donnees['note_localisation'];
 
 	$note_accueil = $donnees['note_accueil'];
 
@@ -108,6 +108,14 @@ $reponse1->closeCursor();
 
  	}
 
+ 	elseif ($_GET['page'] == 'compte'){
+ 		echo '<p>Mon compte<img src=\'image/index_2.png\'>Mes avis</p>';
+ 	}
+
+ 	else {
+ 		echo '<p>Accueil<img src=\'image/index_2.png\'>Mes avis</p>';
+ 	}
+
  	?>
 
  	</aside>
@@ -129,18 +137,18 @@ $reponse1->closeCursor();
  				<div><img src="image/piece.png"><?php echo $salaire.' €'; ?></div>
  				<div><img src="image/logo_domaine_black.png"><?php echo $domaine ?></div>		
  				<div><img src="image/calendrier.png"><?php echo $duree.' semaines'; ?></div>
- 				<div><img src="image/logo_localisation_black.png"><?php echo $fk_localisation ?></div>
+ 				<div><img src="image/logo_localisation_black.png"><?php echo sup_num_location($fk_localisation) ?></div>
  			</div>
 
  			<div id="etoile_detail">
  				<div id="details_interet">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_interet*4); ?></div>Interêt
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_interet*4); ?></div>Interêt du sujet
  				</div>
  				<div id="details_ambiance">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accueil*4); ?></div>Ambiance
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accueil*4); ?></div>Accueil
  				</div>
  				<div id="details_accessibilite">
- 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_accessibilite*4); ?></div>Localisation
+ 					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_localisation*4); ?></div>Localisation
  				</div>
  				<div id="details_encadrement">
  					<div class="avis_stage_etoile"><?php echo convertisseur_note_etoile($note_encadrement*4); ?></div>Encadrement

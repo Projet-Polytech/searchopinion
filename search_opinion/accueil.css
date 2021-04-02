@@ -599,5 +599,34 @@ footer #bottom_footer {
 	}
 }
 
+@media screen and (max-width: 960px) {
+
+	header {
+		grid-template-columns: 120px 1fr 100px 100px 120px 120px 1fr 130px;
+	}
+
+	header #header_logo {
+		margin: 0px
+	}
+
+	header div > a {
+		font-size: 16px;
+	}
+
+	header div > a img {
+		width: 10px ;
+		height:10px;
+	}
+
+	#fond_accueil h1 {
+		font-size: 80px;
+	}
+
+	#fond_accueil h2 {
+		font-size: 20px;
+	}
+
+}
+
 
 

@@ -194,8 +194,12 @@ aside a {
     display: flex;
     align-items: center;
     color: white;
-    margin: 0px 16px 0px 16px;
+    margin: 0px 0px 0px 16px;
     transition: background-color 400ms;
+}
+
+aside p {
+    margin-left: 16px;
 }
 
 aside a:hover {
@@ -244,7 +248,7 @@ section {
     grid-template-rows: 1fr;
     margin: 60px 0px 60px 0px;
     border-radius: 4px;
-    padding: 50px;
+    padding: 40px;
 }
 
 section #detail_left {
@@ -303,11 +307,11 @@ section #detail_right h2 {
     background-color: ;
     width: 94%;
     height: 50px;
-    font-family: 'Patua';
+    font-family: 'Alata';
     font-size: 24px;
     display: flex;
     align-items: center;
-    color:#a2a2a2;
+    color:#545454;
     margin-left:6%;
     font-weight: normal;
 }
