@@ -24,6 +24,7 @@
 				$pb_password = 1;
 			}
 		}
+		$req->closeCursor();
 	}
 ?>
 <script type="text/javascript">
