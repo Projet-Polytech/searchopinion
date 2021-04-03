@@ -37,15 +37,17 @@ $_SESSION['page'] = 1;
 					<h3>Localisation<img src="image/logo_localisation_2.png"></h3>
 					<p>Parmi les avis existants</p>
 
-					<input list="Localisation" type="text" placeholder="ex : Paris" name="Localisation" required pattern=<?php echo '\''.db_localisation().'\''?>>
+					<input list="Localisation" type="text" placeholder="ex : Paris" name="Localisation" id="localisation" required pattern=<?php echo '\''.db_localisation().'\''?>>
 						<datalist id="Localisation">
 							<option value="Toute localisation">
 						  	<?php 
 
 						  	$requete_localisation = $bdd->query('SELECT DISTINCT fk_localisation FROM avis');
+						  	$distinct_localisation = [];
 
 							while($lieu = $requete_localisation->fetch()) {
 								echo '<option value="'.$lieu['fk_localisation'].'">';
+								array_push($distinct_localisation, $lieu['fk_localisation']);
 							}
 
 							$requete_localisation->closeCursor(); 
@@ -58,17 +60,14 @@ $_SESSION['page'] = 1;
 				<div class="recherche">
 					<h3>Domaine<img src="image/logo_domaine.png"></h3>
 					
-					<select name="domaine" >
+					<select name="domaine" id="domaine">
+
 						
 					<?php 
 
-					$requete_filiere = $bdd->query('SELECT DISTINCT fk_domaine FROM avis');
-
-					while($filiere = $requete_filiere->fetch()) {
-						echo '<option  value="'.$filiere['fk_domaine'].'">'.$filiere['fk_domaine'].'</option>';
-					}
-
-					$requete_filiere->closeCursor(); 
+					$requete_filiere = $bdd->query('SELECT DISTINCT fk_localisation, fk_domaine FROM avis');
+					$domaines = $requete_filiere->fetchAll();
+					$requete_filiere->closeCursor();
 
 					?>
 
@@ -84,6 +83,40 @@ $_SESSION['page'] = 1;
 			
 		</div>
 	</div>
+	<!-- Javascript part to adapt the domain the user can choose depending on the localisation he selected -->
+	<script type="text/javascript">
+		const localisation = document.getElementById("localisation");
+		let domaines = <?php echo json_encode($domaines) ?>;
+		let distinct_domain = [];
+		const distinct_localisation = <?php echo json_encode($distinct_localisation) ?>;
+		for(let i = 0; i < domaines.length; i++) {
+			if(!distinct_domain.includes(domaines[i][1])) {
+				let option = document.createElement('option');
+				option.setAttribute('value', domaines[i][1]);
+				option.setAttribute('id', domaines[i][1]);
+				option.textContent = domaines[i][1];
+				document.getElementById('domaine').appendChild(option);
+				distinct_domain.push(domaines[i][1]);
+			}
+		}
+		//console.log(distinct_domain);
+		//remove the domain that are not linked to the chosen localisation in the database
+		localisation.addEventListener('input', function() {
+			if(localisation.value !== 'Toute localisation' && distinct_localisation.includes(localisation.value)) {
+				good_ones = [];
+				for(let i = 0; i < domaines.length; i++) {
+					if((domaines[i][0] === localisation.value) && (!good_ones.includes(domaines[i][1]))) {
+						good_ones.push(domaines[i][1]);
+					}
+				}
+				for(let i = 0; i < distinct_domain.length; i++) {
+					if(!good_ones.includes(distinct_domain[i])) {
+						document.getElementById('domaine').removeChild(document.getElementById(distinct_domain[i]));
+					}
+				}
+			}
+		});
+	</script>
 
 	<aside>
 		<h2>Retrouvez les stages les mieux notés<br>& vos dernières recherches</h2>

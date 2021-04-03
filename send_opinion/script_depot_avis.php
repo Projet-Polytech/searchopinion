@@ -24,12 +24,13 @@ $note_localisation = $_POST['note_localisation']*2;
 $note_accueil = $_POST['note_accueil']*2;
 $note_encadrement = $_POST['note_encadrement']*2;
 $note_interet = $_POST['note_interet']*2;
-$note_globale = intval(array_sum([$note_accessibilite,$note_accueil,$note_encadrement,$note_interet]));
+$note_globale = intval(array_sum([$note_localisation,$note_accueil,$note_encadrement,$note_interet]));
 //Adjustment of the variables to avoid complication in the database
 $avis = addslashes($_POST['avis']);
 $avis = str_replace('<', "&lt;", $avis);
 $avis = str_replace('>', "&gt;", $avis);
 $nom = addslashes($_POST['entreprise']);
+$logo = str_replace(' ', '', strtolower($nom)) . '.png';
 $sujet = addslashes($_POST['sujet']);
 $adresse = addslashes($_POST['adresse']);
 
@@ -42,7 +43,7 @@ if($verif['num_siret'] != 1) {
 	$entreprise = $bdd->prepare("INSERT INTO entreprises VALUES(:num_siret, :logo, :nom)");
 	$entreprise->bindParam(':num_siret', $siret);
 	$entreprise->bindParam(':nom', $nom);
-	$entreprise->bindParam(':logo', $pb_entreprise);
+	$entreprise->bindParam(':logo', $logo);
 	try {
 		$entreprise->execute();
 	}
